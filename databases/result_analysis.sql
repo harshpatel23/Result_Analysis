@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 15, 2019 at 07:59 PM
+-- Generation Time: Mar 17, 2019 at 04:31 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `kjsce_results`
+-- Database: `result_analysis`
 --
 
 -- --------------------------------------------------------
@@ -40,7 +40,15 @@ CREATE TABLE `courses` (
 --
 
 INSERT INTO `courses` (`course_id`, `course_name`, `credit_points`, `semester_no`) VALUES
-('', '', 0, 0);
+('COURSE-1', 'COURSE-1', 4, 1),
+('COURSE-2', 'COURSE-2', 4, 1),
+('COURSE-3', 'COURSE-3', 4, 1),
+('COURSE-4', 'COURSE-4', 4, 1),
+('COURSE-5', 'COURSE-5', 1, 1),
+('COURSE-6', 'COURSE-6', 1, 1),
+('COURSE-7', 'COURSE-7', 1, 1),
+('COURSE-8', 'COURSE-8', 1, 1),
+('COURSE-9', 'COURSE-9', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -7267,6 +7275,16 @@ CREATE TABLE `teacher_to_courses` (
   `teacher_id` varchar(15) NOT NULL,
   `course_id` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `courses`
+--
+ALTER TABLE `courses`
+  ADD PRIMARY KEY (`course_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
