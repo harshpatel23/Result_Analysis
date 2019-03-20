@@ -1,6 +1,7 @@
 """
 Python script to extract csv file into new csv file according to our database format
 """
+import random
 import pandas as pd
 import os
 
@@ -102,8 +103,196 @@ def student_theory_marks():
         data.to_csv('student_theory_marks.csv', mode='a', header=False, index=False)
 
 
+def generate_second_year_data():
+    start_seat_no = 31711001
+    random_data = []
+    """
+    generating student_cgpa_data
+    """
+    for i in range(610):
+        if i % 10 == 0:
+            credit_points = random.randint(70, 110)
+            random_data.append([start_seat_no + 1, credit_points, "--", random.randint(260, 440)])
+        else:
+            credit_points = random.randint(155, 208)
+            random_data.append([start_seat_no + 1, credit_points, round(credit_points/22, 2), random.randint(450, 606)])
+    data = pd.DataFrame(random_data)
+    data.to_csv('student_cgpa.csv', mode='a', header=False, index=False)
+
+    start_seat_no = 31711001
+    random_data = []
+    """
+    generating student practical data
+    """
+    course_list = ['COURSE-1', 'COURSE-5', 'COURSE-6', 'COURSE-7', 'COURSE-8', 'COURSE-9']
+    for items in course_list:
+        for i in range(610):
+            if items == 'COURSE-1':
+                tw_marks = random.randint(18, 24)
+                random_data.append([start_seat_no + i, items, tw_marks, "", tw_marks])
+            elif items == 'COURSE-5':
+                tw_marks = random.randint(60, 100)
+                random_data.append([start_seat_no + i, items, tw_marks, "", tw_marks])
+            elif items == 'COURSE-7':
+                tw_marks = random.randint(27, 50)
+                random_data.append([start_seat_no + i, items, tw_marks, "", tw_marks])
+            elif items == 'COURSE-6':
+                tw_marks = random.randint(18, 24)
+                oral_marks = random.randint(15, 23)
+                random_data.append([start_seat_no + i, items, tw_marks, oral_marks, tw_marks + oral_marks])
+            elif items == 'COURSE-8':
+                tw_marks = random.randint(18, 24)
+                oral_marks = random.randint(15, 23)
+                random_data.append([start_seat_no + i, items, tw_marks, oral_marks, tw_marks + oral_marks])
+            elif items == 'COURSE-9':
+                tw_marks = random.randint(26, 50)
+                random_data.append([start_seat_no + i, items, tw_marks, "", tw_marks])
+        data = pd.DataFrame(random_data)
+        data.to_csv('student_practical_marks.csv', mode='a', header=False, index=False)
+
+        start_seat_no = 31711001
+        random_data = []
+        """
+        generating student theory data
+        """
+        course_list = ['COURSE-1', 'COURSE-2', 'COURSE-3', 'COURSE-4']
+        for items in course_list:
+            for i in range(610):
+                ese_marks = random.randint(22, 50)
+                ca_marks = random.randint(25, 50)
+                random_data.append([start_seat_no + i, items, ese_marks, ca_marks, ese_marks + ca_marks])
+        data = pd.DataFrame(random_data)
+        data.to_csv('student_theory_marks.csv', mode='a', header=False, index=False)
+
+
+def generate_third_year_data():
+    start_seat_no = 51611022
+    random_data = []
+    """
+        generating student_cgpa_data
+    """
+    for i in range(610):
+        if i % 10 == 0:
+            credit_points = random.randint(70, 110)
+            random_data.append([start_seat_no + 1, credit_points, "--", random.randint(260, 440)])
+        else:
+            credit_points = random.randint(155, 208)
+            random_data.append([start_seat_no + 1, credit_points, round(credit_points/22, 2), random.randint(450, 606)])
+    data = pd.DataFrame(random_data)
+    data.to_csv('student_cgpa.csv', mode='a', header=False, index=False)
+
+    start_seat_no = 51611001
+    random_data = []
+    """
+    generating student practical data
+    """
+    course_list = ['COURSE-1', 'COURSE-5', 'COURSE-6', 'COURSE-7', 'COURSE-8', 'COURSE-9']
+    for items in course_list:
+        for i in range(610):
+            if items == 'COURSE-1':
+                tw_marks = random.randint(18, 24)
+                random_data.append([start_seat_no + i, items, tw_marks, "", tw_marks])
+            elif items == 'COURSE-5':
+                tw_marks = random.randint(60, 100)
+                random_data.append([start_seat_no + i, items, tw_marks, "", tw_marks])
+            elif items == 'COURSE-7':
+                tw_marks = random.randint(27, 50)
+                random_data.append([start_seat_no + i, items, tw_marks, "", tw_marks])
+            elif items == 'COURSE-6':
+                tw_marks = random.randint(18, 24)
+                oral_marks = random.randint(15, 23)
+                random_data.append([start_seat_no + i, items, tw_marks, oral_marks, tw_marks + oral_marks])
+            elif items == 'COURSE-8':
+                tw_marks = random.randint(18, 24)
+                oral_marks = random.randint(15, 23)
+                random_data.append([start_seat_no + i, items, tw_marks, oral_marks, tw_marks + oral_marks])
+            elif items == 'COURSE-9':
+                tw_marks = random.randint(26, 50)
+                random_data.append([start_seat_no + i, items, tw_marks, "", tw_marks])
+        data = pd.DataFrame(random_data)
+        data.to_csv('student_practical_marks.csv', mode='a', header=False, index=False)
+
+        start_seat_no = 51611001
+        random_data = []
+        """
+        generating student theory data
+        """
+        course_list = ['COURSE-1', 'COURSE-2', 'COURSE-3', 'COURSE-4']
+        for items in course_list:
+            for i in range(610):
+                ese_marks = random.randint(22, 50)
+                ca_marks = random.randint(25, 50)
+                random_data.append([start_seat_no + i, items, ese_marks, ca_marks, ese_marks + ca_marks])
+        data = pd.DataFrame(random_data)
+        data.to_csv('student_theory_marks.csv', mode='a', header=False, index=False)
+
+
+def generate_fourth_year_data():
+    start_seat_no = 71511022
+    """
+        generating student_cgpa_data
+    """
+    random_data = []
+    for i in range(121):
+        if i % 10 == 0:
+            credit_points = random.randint(70, 110)
+            random_data.append([start_seat_no + 1, credit_points, "--", random.randint(260, 440)])
+        else:
+            credit_points = random.randint(155, 208)
+            random_data.append([start_seat_no + 1, credit_points, round(credit_points/22, 2), random.randint(450, 606)])
+    data = pd.DataFrame(random_data)
+    data.to_csv('student_cgpa.csv', mode='a', header=False, index=False)
+
+    start_seat_no = 71511001
+    random_data = []
+    """
+    generating student practical data
+    """
+    course_list = ['COURSE-1', 'COURSE-5', 'COURSE-6', 'COURSE-7', 'COURSE-8', 'COURSE-9']
+    for items in course_list:
+        for i in range(610):
+            if items == 'COURSE-1':
+                tw_marks = random.randint(18, 24)
+                random_data.append([start_seat_no + i, items, tw_marks, "", tw_marks])
+            elif items == 'COURSE-5':
+                tw_marks = random.randint(60, 100)
+                random_data.append([start_seat_no + i, items, tw_marks, "", tw_marks])
+            elif items == 'COURSE-7':
+                tw_marks = random.randint(27, 50)
+                random_data.append([start_seat_no + i, items, tw_marks, "", tw_marks])
+            elif items == 'COURSE-6':
+                tw_marks = random.randint(18, 24)
+                oral_marks = random.randint(15, 23)
+                random_data.append([start_seat_no + i, items, tw_marks, oral_marks, tw_marks + oral_marks])
+            elif items == 'COURSE-8':
+                tw_marks = random.randint(18, 24)
+                oral_marks = random.randint(15, 23)
+                random_data.append([start_seat_no + i, items, tw_marks, oral_marks, tw_marks + oral_marks])
+            elif items == 'COURSE-9':
+                tw_marks = random.randint(26, 50)
+                random_data.append([start_seat_no + i, items, tw_marks, "", tw_marks])
+        data = pd.DataFrame(random_data)
+        data.to_csv('student_practical_marks.csv', mode='a', header=False, index=False)
+
+        start_seat_no = 71511001
+        random_data = []
+        """
+        generating student theory data
+        """
+        course_list = ['COURSE-1', 'COURSE-2', 'COURSE-3', 'COURSE-4']
+        for items in course_list:
+            for i in range(610):
+                ese_marks = random.randint(22, 50)
+                ca_marks = random.randint(25, 50)
+                random_data.append([start_seat_no + i, items, ese_marks, ca_marks, ese_marks + ca_marks])
+        data = pd.DataFrame(random_data)
+        data.to_csv('student_theory_marks.csv', mode='a', header=False, index=False)
+
+
 if __name__ == "__main__":
     # student_cgpa()
     # student_practical_marks()
     # student_theory_marks()
+    generate_second_year_data()
+    generate_third_year_data()
     pass
