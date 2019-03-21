@@ -10,10 +10,10 @@
     
   // Set a callback to run when the Google Visualization API is loaded.
   google.charts.setOnLoadCallback(drawChart);
-  
+  // url "generic_class.php/filter_condition=CGPA"
   function drawChart() {
     var jsonData = $.ajax({
-        url: "generic_class.php?filter_condition=CA",
+        url: "generic_class2.php",
         dataType: "json",
         async: false
         }).responseText;
