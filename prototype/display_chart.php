@@ -1,7 +1,8 @@
 <?php include '../includes/header.html'; ?>
   <!--Div that will hold the chart-->
   <div id="chart_div"></div>
-  <a href="./php_class_test.php"><button class="btn btn-primary">Back</button></a>
+  <div id="piechart"></div>
+  <a href="./generic_class.php?filter_condition=CGPA"><button class="btn btn-primary">Back</button></a>
   <script type="text/javascript">
   
   // Load the Visualization API and the piechart package.
@@ -9,10 +10,10 @@
     
   // Set a callback to run when the Google Visualization API is loaded.
   google.charts.setOnLoadCallback(drawChart);
-    
+  
   function drawChart() {
     var jsonData = $.ajax({
-        url: "php_class_test.php",
+        url: "generic_class.php?filter_condition=CA",
         dataType: "json",
         async: false
         }).responseText;
@@ -22,8 +23,11 @@
     var data = new google.visualization.DataTable(jsonData);
 
     // Instantiate and draw our chart, passing in some options.
-    var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-    chart.draw(data, {width: 1000, height: 1000});
+    var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+    chart.draw(data, {width: 800, height: 800});
+
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+    chart.draw(data, {width: 800, height: 800});
   }
   </script>
 <?php include '../includes/footer.html'; ?>

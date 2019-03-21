@@ -10,7 +10,7 @@
 			if ($i == 0) {
 				$row_string .= '{"v": "'.$value[$i].'","f":null}';
 			} else {
-				$row_string .= ',{"v": '.$value[$i].',"f":null}';
+				$row_string .= ',{"v": '.$value[$i].'","f":null}';
 			}	
 		}
 		$row_string .= ']}'.$seperator;
