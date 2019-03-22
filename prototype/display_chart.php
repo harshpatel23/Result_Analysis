@@ -13,7 +13,7 @@
   // url "generic_class.php/filter_condition=CGPA"
   function drawChart() {
     var jsonData = $.ajax({
-        url: "generic_class2.php",
+        url: "student_semester.php",
         dataType: "json",
         async: false
         }).responseText;
@@ -24,7 +24,14 @@
 
     // Instantiate and draw our chart, passing in some options.
     var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-    chart.draw(data, {width: 800, height: 800});
+    chart.draw(data, {width: 800, height: 800, vAxis: { 
+              title: "CA Marks", 
+              viewWindowMode:'explicit',
+              viewWindow:{
+                max:50,
+                min:0
+              }
+            }});
 
     var chart = new google.visualization.PieChart(document.getElementById('piechart'));
     chart.draw(data, {width: 800, height: 800});
