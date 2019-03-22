@@ -11,7 +11,7 @@
 
 									<label class="form-check">
 										<?php $url = "student_semester.php?sem=".$i; ?>
-						  				<input onclick="refreshChart(<?php echo "'prototype/".$url."'"; ?>);" class="form-check-input" type="radio" name="semester" value="sem<?php echo $i;?>" >
+						  				<input onclick="refreshChart(<?php echo "'filters/".$url."'"; ?>, 'column_chart');" class="form-check-input" type="radio" name="semester" value="sem<?php echo $i;?>" >
 						  				<span class="form-check-label">Semester <?php echo $i;?> </span>
 									</label>
 							<?php

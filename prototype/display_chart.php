@@ -13,7 +13,7 @@
   // url "generic_class.php/filter_condition=CGPA"
   function drawChart() {
     var jsonData = $.ajax({
-        url: "student_semester.php",
+        url: "teacher_filter.php?filter_condition=ESE",
         dataType: "json",
         async: false
         }).responseText;

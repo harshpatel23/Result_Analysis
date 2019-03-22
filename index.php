@@ -11,7 +11,9 @@ session_start();
 			<?php
 				if($_SESSION['user_type'] == 'student'){
 					include 'filter_bar/filter_student.php';
-				}
+				}elseif ($_SESSION['user_type'] == 'teacher') {
+          include 'filter_bar/filter_teacher.php';
+        }
 			?>
 		</div>	
 		<div  class="col-sm-9" id="display">
@@ -26,7 +28,7 @@ session_start();
 	google.charts.load('current', {'packages':['corechart']});
 
 
-  function refreshChart(url_path){
+  function refreshChart(url_path, type_chart){
   	var jsonData = $.ajax({
       url: url_path,
       dataType: "json",
@@ -38,15 +40,20 @@ session_start();
     var data = new google.visualization.DataTable(jsonData);
 
     // Instantiate and draw our chart, passing in some options.
-    var chart = new google.visualization.ColumnChart(document.getElementById('display'));
-    chart.draw(data, {width: 800, height: 800, vAxis: { 
-              title: "CA Marks", 
-              viewWindowMode:'explicit',
-              viewWindow:{
-                max:50,
-                min:0
-              }
-            }});
+    if (type_chart == 'column_chart') {
+      var chart = new google.visualization.ColumnChart(document.getElementById('display'));
+      chart.draw(data, {width: 800, height: 800, vAxis: { 
+                title: "CA Marks", 
+                viewWindowMode:'explicit',
+                viewWindow:{
+                  max:50,
+                  min:0
+                }
+              }});
+    }else if (type_chart == 'pie_chart') {
+      var chart = new google.visualization.PieChart(document.getElementById('display'));
+      chart.draw(data, {width: 800, height: 800});
+    }
   }
 
 
