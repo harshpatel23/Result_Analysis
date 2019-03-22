@@ -4,7 +4,8 @@
 	$result = $conn->query($sql);
 	$result_array = $result->fetchAll(PDO::FETCH_ASSOC);	
 	$metadata = array(array("Course", "course_id", "string"), array("CA marks", "ca_marks", "number"));
-	displayJSONString($result_array, $metadata);
+	$output_string = returnJSONString($result_array, $metadata);
+	$echo $output_string;
 	**/
 ?>
 <?php
