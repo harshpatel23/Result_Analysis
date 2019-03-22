@@ -10,7 +10,8 @@
 								for($i = 1;$i < $current_sem;$i++){	?>
 
 									<label class="form-check">
-						  				<input class="form-check-input" type="radio" name="semester" value="sem<?php echo $i;?>">
+										<?php $url = "student_semester.php?sem=".$i; ?>
+						  				<input onclick="refreshChart(<?php echo "'prototype/".$url."'"; ?>);" class="form-check-input" type="radio" name="semester" value="sem<?php echo $i;?>" >
 						  				<span class="form-check-label">Semester <?php echo $i;?> </span>
 									</label>
 							<?php
