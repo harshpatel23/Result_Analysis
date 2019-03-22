@@ -1,12 +1,12 @@
-<?php include '../includes/db_conn.php'; ?>
 <?php
+	/**  USAGE:
 	$sql = "SELECT course_id, ca_marks FROM student_theory_marks WHERE seat_no=11811001;";
 	$result = $conn->query($sql);
 	$result_array = $result->fetchAll(PDO::FETCH_ASSOC);	
 	$metadata = array(array("Course", "course_id", "string"), array("CA marks", "ca_marks", "number"));
 	displayJSONString($result_array, $metadata);
+	**/
 ?>
-
 <?php
 	function addRow($value, $metadata){
 		$row_string = '{"c": [';
@@ -34,7 +34,7 @@
 		return $column_string;
 	}
 	
-	function displayJSONString($result_array, $metadata){
+	function returnJSONString($result_array, $metadata){
 		$row_string = '';
 		$column_string = addColumn($metadata);
 		for ($i=0; $i < count($result_array); $i++) { 
@@ -49,6 +49,6 @@
 		  "cols": ['.$column_string.'],
 		  "rows": ['.$row_string.']
 		}';
-	echo $string;
+	return $string;
 	}
 ?>
