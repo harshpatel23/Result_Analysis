@@ -31,7 +31,7 @@
 	for ($i=0; $i < count($conditions); $i++) { 
 		if (isset($_GET['course_id'])) {
 			$course_id = $_GET['course_id'];
-			$sql = "SELECT COUNT(*) as count FROM $table_name NATURAL JOIN teacher_to_courses WHERE $conditions[$i] and course_id=$course_id and teacher_id=$teacher_id;";
+			$sql = "SELECT COUNT(*) as count FROM $table_name NATURAL JOIN teacher_to_courses WHERE $conditions[$i] and course_id=\"$course_id\" and teacher_id=$teacher_id;";
 		}else {
 			$sql = "SELECT COUNT(*) as count FROM $table_name NATURAL JOIN teacher_to_courses WHERE $conditions[$i] and teacher_id=$teacher_id;";
 		}
@@ -42,6 +42,7 @@
 				"$conditions[$i]" => "$conditions[$i]",
 				"count" => "$count",
 			);
+
 		$metadata = array(array("Range", "$conditions[$i]", "string"), array("Count", "count", "number"));
 		if ($i == 0) {
 			$row_string = addRow($values, $metadata);

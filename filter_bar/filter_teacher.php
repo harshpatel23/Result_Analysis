@@ -11,7 +11,7 @@
 					for($i = 0; $i < count($arr); $i++){	?>
 						<label class="form-check">
 							<?php $url = "teacher_filter.php?filter_condition=".$arr[$i]; ?>
-			  				<input onclick="refreshChart(<?php echo "'filters/".$url."'"; ?>, 'pie_chart');" class="form-check-input marks_type" type="radio" name="marks_type" value="<?php echo $arr[$i];?>" >
+			  				<input class="form-check-input filter_condition filter-group" type="radio" name="marks_type" value="<?php echo $arr[$i];?>" >
 			  				<span class="form-check-label"><?php echo $arr[$i];?> </span>
 						</label>
 				<?php
@@ -32,7 +32,7 @@
 					while ( $row = $result->fetch(PDO::FETCH_ASSOC)) {  ?>
 						<label class="form-check">
 							<?php $url = "teacher_filter.php?filter_condition=".$_SESSION['marks_type']."&course_id=".$row['course_id']; ?>
-		  				<input onclick="refreshChart(<?php echo "'filters/".$url."'"; ?>, 'pie_chart');" class="form-check-input subject_id" type="radio" name="my_courses" value="<?php echo $row['course_id'];?>">
+		  				<input class="form-check-input course_id filter-group" type="radio" name="my_courses" value="<?php echo $row['course_id'];?>">
 		  				<span class="form-check-label"><?php echo $row['course_id'];?> </span>
 						</label>
 				<?php
