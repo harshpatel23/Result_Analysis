@@ -31,7 +31,7 @@
 					$result = $conn->query($sql);
 					while ( $row = $result->fetch(PDO::FETCH_ASSOC)) {  ?>
 						<label class="form-check">
-							<?php $url = "teacher_filter.php?filter_condition=".$_SESSION['marks_type']."&course_id=".$row['course_id']; ?>
+							<!-- <?php //$url = "teacher_filter.php?filter_condition=".$_SESSION['marks_type']."&course_id=".$row['course_id']; ?> -->
 		  				<input class="form-check-input course_id filter-group" type="radio" name="my_courses" value="<?php echo $row['course_id'];?>">
 		  				<span class="form-check-label"><?php echo $row['course_id'];?> </span>
 						</label>
