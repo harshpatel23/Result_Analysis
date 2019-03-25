@@ -25,8 +25,9 @@ session_start();
 </div>
 <script type="text/javascript">
 	// Load the Visualization API and the piechart package.
-	google.charts.load('current', {'packages':['corechart']});
 
+    
+  google.charts.load('current', {'packages':['corechart']});
 
   function refreshChart(url_path, type_chart){
   	var jsonData = $.ajax({
