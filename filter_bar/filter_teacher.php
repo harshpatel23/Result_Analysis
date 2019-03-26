@@ -10,7 +10,7 @@
 					$sql = "SELECT course_id, type FROM teacher_to_courses WHERE teacher_id = ".$_SESSION['uname'].";";
 					$result = $conn->query($sql);
 					$flag = true;
-					while ( $row = $result->fetch(PDO::FETCH_ASSOC)) {  ?>
+					while ($row = $result->fetch(PDO::FETCH_ASSOC)) { ?>
 						<label class="form-check">
 							<!-- <?php //$url = "teacher_filter.php?filter_condition=".$_SESSION['marks_type']."&course_id=".$row['course_id']; ?> -->
 		  				<input class="form-check-input course_id filter-group <?php echo $row['type'];?>" type="radio" name="my_courses" value="<?php echo $row['course_id'];?>"<?php 
@@ -37,7 +37,7 @@
 					for($i = 0; $i < count($arr); $i++){?>
 						<label class="form-check">
 							<?php $url = "teacher_filter.php?filter_condition=".$arr[$i]; ?>
-			  				<input class="form-check-input filter_condition filter-group" type="radio" name="marks_type" value="<?php echo $arr[$i];?>" <?php 
+			  				<input class="form-check-input filter_condition filter-group <?php echo $arr[$i] ?>" type="radio" name="marks_type" value="<?php echo $arr[$i];?>" <?php 
 			  				if($arr[$i] == "TOTAL")
 			  					echo "checked";
 			  				 ?>>

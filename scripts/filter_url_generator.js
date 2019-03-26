@@ -5,7 +5,6 @@ function apply_filter() {
 		for(i = 0; i < class_filter_tags.length; i++){
 			var filter_tag = class_filter_tags[i];
 			$("."+filter_tag+":checked").each(function() {
-				console.log($(this).val());
 				checked[filter_tag] = $(this).val();
 			});
 		}
@@ -22,14 +21,38 @@ function apply_filter() {
 	refreshChart(page, "pie_chart");
 }
 
-function toggle_filters() {
+function toggle_filters(data) {
+	$(".filter_condition").each(function() {
+		if($(this).val() != "TOTAL")
+			if($.inArray($(this).val().toLowerCase()+"_outof_marks", data) != -1)
+				$(this).prop("disabled", false);
+			else
+				$(this).prop("disabled", true);
+	});
+}
 
+function get_valid_cols(course_id) {
+	$.get(
+		"/get_valid_cols.php",
+		{"course_id": course_id},
+		function(data, status) {
+			toggle_filters(data);
+		},
+		"json"
+		);
 }
 
 $(document).ready(function(){
+	var course_id = $(".course_id:checked").val();
+	get_valid_cols(course_id);
 	google.charts.setOnLoadCallback(apply_filter);
 });
 
 $(".filter-group").click(function() {
-		apply_filter();
+	if($(this).hasClass("course_id")) {
+		get_valid_cols($(this).val());
+		$(".filter-condition:checked").prop("checked", false);
+		$(".TOTAL").prop("checked", true);
+	}
+	apply_filter();
 });
