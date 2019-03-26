@@ -16,10 +16,12 @@ session_start();
         }
 			?>
 		</div>	
-		<div  class="col-sm-9" id="display">
-			<?php
-			echo $_SESSION['uname'];
-			?>
+		<div  class="col-sm-9 container-fluid">
+      <div class="row">
+        <div id="col-chart"></div>
+      <div id="bar-chart"></div>
+      </div>
+      
 		</div>
 	</div>
 </div>
@@ -41,54 +43,18 @@ session_start();
 
     // Instantiate and draw our chart, passing in some options.
     if (type_chart == 'column_chart') {
-      var chart = new google.visualization.ColumnChart(document.getElementById('display'));
-      chart.draw(data, {width: 800, height: 800, vAxis: { 
-                title: "CA Marks", 
+      var chart = new google.visualization.ColumnChart(document.getElementById('col-chart'));
+      chart.draw(data, {width: 500, height: 500, vAxis: { 
+                title: "No of Students", 
                 viewWindowMode:'explicit',
                 viewWindow:{
-                  max:50,
-                  min:0
                 }
               }});
     }else if (type_chart == 'pie_chart') {
-      var chart = new google.visualization.PieChart(document.getElementById('display'));
-      chart.draw(data, {width: 800, height: 800});
+      var chart = new google.visualization.PieChart(document.getElementById('bar-chart'));
+      chart.draw(data, {width: 600, height: 600});
     }
   }
-
-
-
-  // // Load the Visualization API and the piechart package.
-  // google.charts.load('current', {'packages':['corechart']});
-    
-  // // Set a callback to run when the Google Visualization API is loaded.
-  // google.charts.setOnLoadCallback(drawChart);
-  // // url "generic_class.php/filter_condition=CGPA"
-  // function drawChart() {
-  //   var jsonData = $.ajax({
-  //       url: "student_semester.php",
-  //       dataType: "json",
-  //       async: false
-  //       }).responseText;
-        
-  //   // Create our data table out of JSON data loaded from server.
-  //   console.log(jsonData);
-  //   var data = new google.visualization.DataTable(jsonData);
-
-  //   // Instantiate and draw our chart, passing in some options.
-  //   var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-  //   chart.draw(data, {width: 800, height: 800, vAxis: { 
-  //             title: "CA Marks", 
-  //             viewWindowMode:'explicit',
-  //             viewWindow:{
-  //               max:50,
-  //               min:0
-  //             }
-  //           }});
-
-    // var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-    // chart.draw(data, {width: 800, height: 800});
-  // }
   </script>
 <?php
 include 'includes/footer.html';

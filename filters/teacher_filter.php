@@ -55,9 +55,17 @@
 					$column_name = "tw_marks";
 
 					$tw_outof_marks = (float)$outof_data['tw_outof_marks'];
-					$conditions = array("tw_marks >=".(string)($tw_outof_marks*85/100), "tw_marks >=".(string)($tw_outof_marks*75/100)." and tw_marks <".(string)($tw_outof_marks*85/100), "tw_marks >=".(string)($tw_outof_marks*70/100)." and tw_marks <".(string)($tw_outof_marks*75/100), "tw_marks >=".(string)($tw_outof_marks*60/100)." and tw_marks <".(string)$tw_outof_marks*70/100, "tw_marks >=".(string)($tw_outof_marks*50/100)." and tw_marks <".(string)$tw_outof_marks*60/100);
+					$conditions = array("tw_marks >=".ceil($tw_outof_marks*85/100), 
+						"tw_marks >=".ceil($tw_outof_marks*75/100)." and tw_marks <".ceil($tw_outof_marks*85/100), 
+						"tw_marks >=".ceil($tw_outof_marks*70/100)." and tw_marks <".($tw_outof_marks*75/100), 
+						"tw_marks >=".ceil($tw_outof_marks*60/100)." and tw_marks <".ceil($tw_outof_marks*70/100), 
+						"tw_marks >=".ceil(($tw_outof_marks*50/100))." and tw_marks <".ceil($tw_outof_marks*60/100));
 
-					$condition_labels = array("greater than ".$tw_outof_marks*85/100, "between ".($tw_outof_marks*75/100)." and ".$tw_outof_marks*85/100, "between ".($tw_outof_marks*70/100)." and ".$tw_outof_marks*75/100, "between ".($tw_outof_marks*60/100)." and ".($tw_outof_marks*70/100), "between ".($tw_outof_marks*50/100)." and ".$tw_outof_marks*60/100);
+					$condition_labels = array("greater than ".ceil($tw_outof_marks*85/100), 
+						"between ".ceil($tw_outof_marks*75/100)." and ".ceil($tw_outof_marks*85/100), 
+						"between ".ceil($tw_outof_marks*70/100)." and ".ceil($tw_outof_marks*75/100), 
+						"between ".ceil($tw_outof_marks*60/100)." and ".ceil($tw_outof_marks*70/100), 
+						"between ".ceil($tw_outof_marks*50/100)." and ".ceil($tw_outof_marks*60/100));
 
 					$table_name = "student_practical_marks";
 				}
@@ -69,9 +77,17 @@
 				$column_name = "oral_marks";
 
 				$oral_outof_marks = (float)$outof_data['oral_outof_marks'];
-				$conditions = array("oral_marks >=".(string)($oral_outof_marks*85/100), "oral_marks >=".(string)($oral_outof_marks*75/100)." and oral_marks <".(string)($oral_outof_marks*85/100), "oral_marks >=".(string)($oral_outof_marks*70/100)." and oral_marks <".(string)($oral_outof_marks*75/100), "oral_marks >=".(string)($oral_outof_marks*60/100)." and oral_marks <".(string)$oral_outof_marks*70/100, "oral_marks >=".(string)($oral_outof_marks*50/100)." and oral_marks <".(string)$oral_outof_marks*60/100);
+				$conditions = array("oral_marks >=".ceil($oral_outof_marks*85/100), 
+					"oral_marks >=".ceil($oral_outof_marks*75/100)." and oral_marks <".ceil($oral_outof_marks*85/100), 
+					"oral_marks >=".ceil($oral_outof_marks*70/100)." and oral_marks <".ceil($oral_outof_marks*75/100), 
+					"oral_marks >=".ceil($oral_outof_marks*60/100)." and oral_marks <".ceil($oral_outof_marks*70/100), 
+					"oral_marks >=".ceil($oral_outof_marks*50/100)." and oral_marks <".ceil($oral_outof_marks*60/100));
 
-				$condition_labels = array("greater than ".$oral_outof_marks*85/100, "between ".($oral_outof_marks*75/100)." and ".$oral_outof_marks*85/100, "between ".($oral_outof_marks*70/100)." and ".$oral_outof_marks*75/100, "between ".($oral_outof_marks*60/100)." and ".($oral_outof_marks*70/100), "between ".($oral_outof_marks*50/100)." and ".$oral_outof_marks*60/100);
+				$condition_labels = array("greater than ".ceil($oral_outof_marks*85/100), 
+					"between ".ceil($oral_outof_marks*75/100)." and ".ceil($oral_outof_marks*85/100), 
+					"between ".ceil($oral_outof_marks*70/100)." and ".ceil($oral_outof_marks*75/100), 
+					"between ".ceil($oral_outof_marks*60/100)." and ".ceil($oral_outof_marks*70/100), 
+					"between ".ceil($oral_outof_marks*50/100)." and ".ceil($oral_outof_marks*60/100));
 
 				$table_name = "student_practical_marks";
 			}
@@ -85,7 +101,7 @@
 		if (isset($_GET['course_id'])) {
 			$course_id = $_GET['course_id'];
 			$sql = "SELECT COUNT(*) as count FROM $table_name NATURAL JOIN teacher_to_courses WHERE $conditions[$i] and course_id=\"$course_id\" and teacher_id=$teacher_id;";
-		}else {
+		} else {
 			$sql = "SELECT COUNT(*) as count FROM $table_name NATURAL JOIN teacher_to_courses WHERE $conditions[$i] and teacher_id=$teacher_id;";
 		}
 		$result = $conn->query($sql);

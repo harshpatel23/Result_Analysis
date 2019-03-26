@@ -19,6 +19,7 @@ function apply_filter() {
 			page += "&"+filter+"="+checked[filter];
 	}
 	refreshChart(page, "pie_chart");
+	refreshChart(page, "column_chart")
 }
 
 function toggle_filters(data) {
