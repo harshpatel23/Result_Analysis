@@ -24,23 +24,22 @@ function apply_filter() {
 
 function toggle_filters(data) {
 	$(".filter_condition").each(function() {
-		if($(this).val() != "TOTAL")
+		if($(this).val() != "TOTAL"){
 			if($.inArray($(this).val().toLowerCase()+"_outof_marks", data) != -1)
 				$(this).prop("disabled", false);
 			else
 				$(this).prop("disabled", true);
+		}
 	});
 }
 
 function get_valid_cols(course_id) {
 	$.get(
-		"/get_valid_cols.php",
+		"get_valid_cols.php",
 		{"course_id": course_id},
 		function(data, status) {
-			toggle_filters(data);
-		},
-		"json"
-		);
+			toggle_filters(JSON.parse(data));
+		});
 }
 
 $(document).ready(function(){
