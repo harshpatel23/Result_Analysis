@@ -1,10 +1,10 @@
+var class_filter_tags = ['filter_condition', "course_id"];
 function apply_filter() {
-	var class_filter_tags = ['filter_condition', "course_id"];
 	var page = "filters/teacher_filter.php";
 		var checked = {};
 		for(i = 0; i < class_filter_tags.length; i++){
 			var filter_tag = class_filter_tags[i];
-			$("."+filter_tag+":checked").each(function() {
+			$("input."+filter_tag+":checked").each(function() {
 				checked[filter_tag] = $(this).val();
 			});
 		}
@@ -22,8 +22,25 @@ function apply_filter() {
 	refreshChart(page, "column_chart")
 }
 
+function change_to_checkbox(checkbox_class){
+	mode = $("button."+checkbox_class).html();
+
+	if(mode == 'Compare') {
+		$("button."+checkbox_class).html("Cancel");
+		$("input."+checkbox_class).each(function () {
+			$(this).attr("type", "checkbox");
+		});
+	}
+	else if(mode == 'Cancel') {
+		$("button."+checkbox_class).html("Compare");
+		$("input."+checkbox_class).each(function () {
+			$(this).attr("type", "radio");
+		});
+	}
+}
+
 function toggle_filters(data) {
-	$(".filter_condition").each(function() {
+	$("input.filter_condition").each(function() {
 		if($(this).val() != "TOTAL"){
 			if($.inArray($(this).val().toLowerCase()+"_outof_marks", data) != -1)
 				$(this).prop("disabled", false);
@@ -43,12 +60,12 @@ function get_valid_cols(course_id) {
 }
 
 $(document).ready(function(){
-	var course_id = $(".course_id:checked").val();
+	var course_id = $("input.course_id:checked").val();
 	get_valid_cols(course_id);
 	google.charts.setOnLoadCallback(apply_filter);
 });
 
-$(".filter-group").click(function() {
+$("input.filter-group").click(function() {
 	if($(this).hasClass("course_id")) {
 		get_valid_cols($(this).val());
 		$(".filter-condition:checked").prop("checked", false);
