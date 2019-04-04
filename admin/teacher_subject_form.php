@@ -20,7 +20,7 @@ $t_id = $_POST['t_id'];
 	if($result){	
 ?>
 		<div class="alert alert-success fade show" role="alert">
-  			<strong>Success...!</strong>Data inserted
+  			<strong>Success...! </strong>Data inserted
   			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
     			<span aria-hidden="true">&times;</span>
   			</button>
@@ -48,8 +48,8 @@ $t_id = $_POST['t_id'];
 
 	 	<label for="course_type">Select Course Type:</label>
 		<select class="form-control" id="course_type" name="course_type">
-		  <option>P</option>
-		  <option>T</option>
+		  <option value="P">Practical</option>
+		  <option value="T">Theory</option>
 		</select>
 		<br>
 		<button value="submit" type="submit" class="btn btn-primary" name="submit">Submit</button>
