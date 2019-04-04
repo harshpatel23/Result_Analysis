@@ -4,8 +4,12 @@
 <?php  
 	$teacher_id = $_SESSION['uname'];
 	$conditions = array();
-	if(isset($_GET['filter_condition']) or isset($_GET['course_id'])){
+	if(isset($_GET['filter_condition']) and isset($_GET['course_id']) and isset($_GET["batch"])){
 		$course_id = $_GET["course_id"];
+		$batch = $_GET["batch"];
+
+		$batch = substr($batch, -2);
+
 		$sql = "SELECT type from teacher_to_courses where course_id=\"".$_GET['course_id'].'"';
 		$result = $conn->query($sql);
 		$data = $result->fetch(PDO::FETCH_ASSOC);
@@ -100,9 +104,9 @@
 	for ($i=0; $i < count($conditions); $i++) { 
 		if (isset($_GET['course_id'])) {
 			$course_id = $_GET['course_id'];
-			$sql = "SELECT COUNT(*) as count FROM $table_name NATURAL JOIN teacher_to_courses WHERE $conditions[$i] and course_id=\"$course_id\" and teacher_id=$teacher_id;";
+			$sql = "SELECT COUNT(*) as count FROM $table_name NATURAL JOIN teacher_to_courses WHERE $conditions[$i] and course_id=\"$course_id\" and teacher_id=$teacher_id and seat_no like \"_$batch%\";";
 		} else {
-			$sql = "SELECT COUNT(*) as count FROM $table_name NATURAL JOIN teacher_to_courses WHERE $conditions[$i] and teacher_id=$teacher_id;";
+			$sql = "SELECT COUNT(*) as count FROM $table_name NATURAL JOIN teacher_to_courses WHERE $conditions[$i] and teacher_id=$teacher_id and seat_no like \"_$batch%\";";
 		}
 		$result = $conn->query($sql);
 		$result_array = $result->fetchAll(PDO::FETCH_ASSOC);

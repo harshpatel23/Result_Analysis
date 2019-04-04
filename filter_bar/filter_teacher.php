@@ -54,4 +54,18 @@
 			</div> <!-- card-body.// -->
 		</div>
 	</article> <!-- card-group-item.// -->
+
+	<article class="card-group-item">
+		<header class="card-header">
+			<h6 class="title">Batch</h6>
+		</header>
+		<div class="filter-content">
+			<div class="card-body">
+				<div class="batch-div">
+					
+				</div>
+				<button type="button" onclick="change_to_checkbox('<?php echo $filter_group_class; ?>')" class="btn btn-success <?php echo $filter_group_class ;?> filter-group">Compare</button>
+			</div> <!-- card-body.// -->
+		</div>
+	</article> <!-- card-group-item.// -->
 </div> <!-- card.// -->
