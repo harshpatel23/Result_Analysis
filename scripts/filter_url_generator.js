@@ -1,30 +1,67 @@
 var class_filter_tags = ['filter_condition', "course_id", "batch"];
 
-
 function apply_filter() {
 	var page = "filters/teacher_filter.php";
-		var checked = {};
-		for(i = 0; i < class_filter_tags.length; i++){
-			var filter_tag = class_filter_tags[i];
-			$("input."+filter_tag+":checked").each(function() {
-				checked[filter_tag] = $(this).val();
-				console.log($(this).val());
+
+	// check if in compare mode
+	$("button.filter-group").each(function(){
+			var checked = {};
+			var comp_filter_grp_name;
+		if($(this).html() == 'Cancel'){
+			// this is the comparison filter-group
+			for(i=0; i < class_filter_tags.length ; i++){
+				if($(this).hasClass(class_filter_tags[i])){
+					//  this is the filter-group class name which needs to be compared
+					comp_filter_grp_name = class_filter_tags[i];
+					break;
+				}
+			}
+
+			// format ---
+			// ?comparison_grp=course_id&course_id=COURSE-121,COURSE-131
+
+			checked['comparison_grp'] = comp_filter_grp_name;
+
+			// get all checked filters in this filter group
+			var comparison_condn = "";
+			comma_flag = true;
+			$("."+comp_filter_grp_name+':checkbox:checked').each(function(){
+				if(comma_flag){
+					comma_flag = false;
+					comparison_condn += $(this).val();
+				}else{
+					comparison_condn += "," + $(this).val();
+				}
 			});
+			checked[comp_filter_grp_name] = comparison_condn;
 		}
-		console.log("checked");
-		console.log(checked);
-	flag = true;
-	for (filter in checked) {
-		if (flag) {
-			page += "?"+filter+"="+checked[filter];
-			flag = false;
-		}
-		else
-			page += "&"+filter+"="+checked[filter];
-	}
-	console.log(page);
-	refreshChart(page, "pie_chart");
-	refreshChart(page, "column_chart")
+		else {
+				var checked = {};
+				for(i = 0; i < class_filter_tags.length; i++){
+					var filter_tag = class_filter_tags[i];
+					$("input."+filter_tag+":checked").each(function() {
+						checked[filter_tag] = $(this).val();
+						console.log($(this).val());
+					});
+				}
+				
+			}
+			flag = true;
+			for (filter in checked) {
+				if (flag) {
+					page += "?"+filter+"="+checked[filter];
+					flag = false;
+				}
+				else
+					page += "&"+filter+"="+checked[filter];
+			}
+			console.log("checked");
+				console.log(checked);
+			console.log(page);
+			refreshChart(page, "pie_chart");
+			refreshChart(page, "column_chart");
+		
+	});
 }
 
 
@@ -85,12 +122,16 @@ $(document).on("click", "input", function() {
 
 
 function get_valid_batch(course_id) {
+	console.log("in get_valid_batch");
+	console.log(course_id);
 	$.ajax({
 		url: "get_valid_batch.php",
 		data: {"course_id": course_id},
 		type: "GET",
 		async: false,
 		success: function(data, status) {
+			console.log("batch data");
+			console.log(data);
 			$(".batch-div").empty();
 
 			input_field = '<div class="form-check"><input class="form-check-input filter-group batch" type="radio" name="batch" id="batch_';
