@@ -28,13 +28,22 @@
 					$filter_condition = $_GET['filter_condition'];
 					$batch = $_GET["batch"];
 					$batch = substr($batch, -2);
+					$gender = $_GET['gender'];
 					break;
 
 				case 'batch':
 					$course_id = $_GET['course_id'];
 					$filter_condition = $_GET['filter_condition'];
 					$batch = $comparison_values[$idx];
-					# TODO
+					$gender = $_GET['gender'];
+					break;
+
+				case 'gender':
+					$course_id = $_GET['course_id'];
+					$filter_condition = $_GET['filter_condition'];
+					$batch = $_GET["batch"];
+					$batch = substr($batch, -2);
+					$gender = $comparison_values[$idx];
 					break;
 
 				case "None":
@@ -44,6 +53,7 @@
 					$comparison_values[] = $course_id;
 					$batch = $_GET["batch"];
 					$batch = substr($batch, -2);
+					$gender = $_GET['gender'];
 					break;
 				default:
 					break;
@@ -125,6 +135,22 @@
 				default:
 					break;
 			} // [SWITCH END]
+
+			// map the gender
+			switch ($gender) {
+				case 'BOTH':
+					$gender_sql_symbol = "LIKE \"%\"";
+					break;
+				case 'MALE':
+					$gender_sql_symbol = "<> \"/\"";
+					break;
+				case 'FEMALE':
+					$gender_sql_symbol = "= \"/\"";
+					break;
+				default:
+					break;
+			}
+
 			// initialize data for first time
 			if($idx == 0){
 				// initialize final data
@@ -154,7 +180,8 @@
 				}
 			}
 			for ($i=0; $i < count($conditions); $i++) { 
-				$sql = "SELECT COUNT(*) as count FROM $table_name NATURAL JOIN teacher_to_courses WHERE $conditions[$i] and course_id=\"$course_id\" and teacher_id=$teacher_id  and seat_no like \"_$batch%\";";
+				$sql = "SELECT COUNT(*) as count FROM $table_name NATURAL JOIN teacher_to_courses NATURAL JOIN students WHERE $conditions[$i] and course_id=\"$course_id\" and teacher_id=$teacher_id  and seat_no like \"_$batch%\" and gender $gender_sql_symbol;";
+				// echo $sql."<br>";
 				$result = $conn->query($sql);
 				$result_array = $result->fetchAll(PDO::FETCH_ASSOC);
 				$count = $result_array[0]["count"];

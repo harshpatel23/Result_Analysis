@@ -71,4 +71,27 @@
 			</div> <!-- card-body.// -->
 		</div>
 	</article> <!-- card-group-item.// -->
+
+	<article class="card-group-item">
+		<header class="card-header">
+			<h6 class="title">Gender</h6>
+		</header>
+		<div class="filter-content">
+			<div class="card-body">
+				<?php 
+					$filter_group_class = "gender";
+					$arr = array("BOTH", "MALE", "FEMALE");
+					for($i = 0; $i < count($arr); $i++){?>
+						<label class="form-check">
+			  				<input class="form-check-input filter-group <?php echo $arr[$i]." ".$filter_group_class ?>" type="radio" name="gender" value="<?php echo $arr[$i];?>" <?php if($arr[$i] == "BOTH")
+			  								echo "checked"; ?>>
+			  				<span class="form-check-label"><?php echo $arr[$i];?> </span>
+						</label>
+				<?php
+					}				
+				?>
+				<button type="button" onclick="change_to_checkbox('<?php echo $filter_group_class; ?>')" class="btn btn-success <?php echo $filter_group_class ;?> filter-group">Compare</button>
+			</div> <!-- card-body.// -->
+		</div>
+	</article> <!-- card-group-item.// -->
 </div> <!-- card.// -->
