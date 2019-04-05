@@ -61,6 +61,9 @@
 		</header>
 		<div class="filter-content">
 			<div class="card-body">
+				<?php 
+				$filter_group_class = "batch"; 
+				?>
 				<div class="batch-div">
 					
 				</div>

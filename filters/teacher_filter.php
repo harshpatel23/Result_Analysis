@@ -12,6 +12,13 @@
 		$comparison_grp = "None";
 		$comparison_values =array(0 => "None");
 	}
+		// handle batch year i.e convert 2016 to 16
+		if($comparison_grp == "batch"){
+			for($i = 0; $i < count($comparison_values); $i++){
+				$comparison_values[$i] = substr($comparison_values[$i], -2);
+			}
+		}
+
 		$final_data = [];
 		$final_metadata = [];
 		for($idx = 0; $idx < count($comparison_values); $idx++) {
@@ -24,16 +31,19 @@
 					break;
 
 				case 'batch':
+					$course_id = $_GET['course_id'];
+					$filter_condition = $_GET['filter_condition'];
+					$batch = $comparison_values[$idx];
 					# TODO
 					break;
 
 				case "None":
-				$course_id = $_GET['course_id'];
-				$filter_condition = $_GET['filter_condition'];
-				$comparison_values = [];
-				$comparison_values[] = $course_id;
-				$batch = $_GET["batch"];
-				$batch = substr($batch, -2);
+					$course_id = $_GET['course_id'];
+					$filter_condition = $_GET['filter_condition'];
+					$comparison_values = [];
+					$comparison_values[] = $course_id;
+					$batch = $_GET["batch"];
+					$batch = substr($batch, -2);
 					break;
 				default:
 					break;
@@ -124,6 +134,22 @@
 				// generate metadata
 				$final_metadata[] = array("Range", "range", "string");
 				for($i = 0;$i < count($comparison_values); $i++){
+					// switch ($comparison_grp) {
+					// 	case 'course_id':
+					// 		$comparison_metadata_name = $comparison_values[$i];
+					// 		break;
+
+					// 	case 'batch':
+					// 		$comparison_metadata_name = substr($comparison_values[$i], -2);
+					// 		break;
+
+					// 	case "None":
+					// 		// note that in above switch case we are storing in $comparison_values
+					// 		$comparison_metadata_name = $comparison_values[$i];
+					// 		break;
+					// 	default:
+					// 		break;
+					// }
 					$final_metadata[] = array($comparison_values[$i], $comparison_values[$i], "number");
 				}
 			}
@@ -133,8 +159,10 @@
 				$result_array = $result->fetchAll(PDO::FETCH_ASSOC);
 				$count = $result_array[0]["count"];
 				$final_data[$i]['range'] = $condition_labels[$i];
-				$final_data[$i][$course_id] = $count;
+				$final_data[$i][$comparison_values[$idx]] = $count;
 			}
 		} // [FOR LOOP END]
+		// echo "<pre> "; print_r($final_data); echo " </pre>";
+		// echo "<pre> "; print_r($final_metadata); echo " </pre>";
 		echo returnJSONString($final_data, $final_metadata);
 ?>
