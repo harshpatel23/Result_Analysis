@@ -31,7 +31,7 @@ session_start();
     
   google.charts.load('current', {'packages':['corechart']});
 
-  function refreshChart(url_path, type_chatrt){
+  function refreshChart(url_path, type_chart){
   	var jsonData = $.ajax({
       url: url_path,
       dataType: "json",

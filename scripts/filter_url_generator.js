@@ -3,10 +3,11 @@ var class_filter_tags = ['filter_condition', "course_id", "batch"];
 function apply_filter() {
 	var page = "filters/teacher_filter.php";
 
+	var checked = {};
+	var comp_filter_grp_name = "none";
+
 	// check if in compare mode
 	$("button.filter-group").each(function(){
-			var checked = {};
-			var comp_filter_grp_name;
 		if($(this).html() == 'Cancel'){
 			// this is the comparison filter-group
 			for(i=0; i < class_filter_tags.length ; i++){
@@ -35,33 +36,45 @@ function apply_filter() {
 			});
 			checked[comp_filter_grp_name] = comparison_condn;
 		}
-		else {
-				var checked = {};
-				for(i = 0; i < class_filter_tags.length; i++){
-					var filter_tag = class_filter_tags[i];
-					$("input."+filter_tag+":checked").each(function() {
-						checked[filter_tag] = $(this).val();
-						console.log($(this).val());
-					});
-				}
+		// else {
+		// 		// var checked = {};
+		// 		// for(i = 0; i < class_filter_tags.length; i++){
+		// 		// 	var filter_tag = class_filter_tags[i];
+		// 		// 	$("input."+filter_tag+":checked").each(function() {
+		// 		// 		checked[filter_tag] = $(this).val();
+		// 		// 		console.log($(this).val());
+		// 		// 	});
+		// 		// }
 				
-			}
-			flag = true;
-			for (filter in checked) {
-				if (flag) {
-					page += "?"+filter+"="+checked[filter];
-					flag = false;
-				}
-				else
-					page += "&"+filter+"="+checked[filter];
-			}
-			console.log("checked");
-				console.log(checked);
-			console.log(page);
-			refreshChart(page, "pie_chart");
-			refreshChart(page, "column_chart");
-		
+		// 	}		
 	});
+
+	for(i = 0; i < class_filter_tags.length; i++){
+		var filter_tag = class_filter_tags[i];
+		if(filter_tag != comp_filter_grp_name){
+			$("input."+filter_tag+":checked").each(function() {
+					checked[filter_tag] = $(this).val();
+			});
+		}
+	}
+
+	flag = true;
+	for (filter in checked) {
+		if (flag) {
+			page += "?"+filter+"="+checked[filter];
+			flag = false;
+		}
+		else
+			page += "&"+filter+"="+checked[filter];
+	}
+
+	console.log("checked");
+	console.log(checked);
+	console.log("url");
+	console.log(page);
+	refreshChart(page, "pie_chart");
+	refreshChart(page, "column_chart");
+
 }
 
 
