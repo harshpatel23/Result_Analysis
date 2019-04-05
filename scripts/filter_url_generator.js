@@ -1,4 +1,4 @@
-var class_filter_tags = ['filter_condition', "course_id", "batch"];
+var class_filter_tags = ['filter_condition', "course_id", "batch", "gender"];
 
 function apply_filter() {
 	var page = "filters/teacher_filter.php";
