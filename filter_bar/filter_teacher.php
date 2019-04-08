@@ -1,4 +1,7 @@
 <?php include './includes/db_conn.php'; ?>
+<script type="text/javascript">
+	var page = "filters/teacher_filter.php";
+</script>
 <div class="card">
 	<article class="card-group-item">
 		<header class="card-header">

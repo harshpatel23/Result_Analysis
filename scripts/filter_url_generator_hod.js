@@ -1,7 +1,7 @@
-var class_filter_tags = ['filter_condition', "course_id", "batch", "gender"];
+var class_filter_tags = ['teacher_id', 'filter_condition', "course_id", "batch", "gender"];
 
 function apply_filter() {
-	var page = "filters/teacher_filter.php";
+	// var page = "filters/teacher_filter.php";
 
 	var checked = {};
 	var comp_filter_grp_name = "none";
@@ -135,16 +135,16 @@ $(document).on("click", "input", function() {
 
 
 function get_valid_batch(course_id) {
-	console.log("in get_valid_batch");
-	console.log(course_id);
+	// console.log("in get_valid_batch");
+	// console.log(course_id);
 	$.ajax({
 		url: "get_valid_batch.php",
 		data: {"course_id": course_id},
 		type: "GET",
 		async: false,
 		success: function(data, status) {
-			console.log("batch data");
-			console.log(data);
+			// console.log("batch data");
+			// console.log(data);
 			$(".batch-div").empty();
 
 			input_field = '<div class="form-check"><input class="form-check-input filter-group batch" type="radio" name="batch" id="batch_';
@@ -158,6 +158,8 @@ function get_valid_batch(course_id) {
 					$(".batch-div").append(input_field+batch_id+'" value="20'+batch_id+'"><label for="batch_'+batch_id+'">20'+batch_id+'</label></div>');
 
 			}
-t		dataType: "json"
+		},
+		dataType: "json"
 	});
 }
+

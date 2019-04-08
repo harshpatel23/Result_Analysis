@@ -1,4 +1,7 @@
-<?php include './includes/db_conn.php'; ?>
+<?php include './includes/db_conn.php'; ?>\
+<script type="text/javascript">
+	var page = "filters/hod_filter.php";
+</script>
 <div class="card">
 	<article class="card-group-item">
 		<header class="card-header">
@@ -11,8 +14,7 @@
 	  				<input class="form-check-input filter-group <?php echo $filter_group_class;?>" type="radio" name="teachers_id" value="ALL" checked>
 	  				<span class="form-check-label">ALL</span>
 				</label>
-				<?php 
-					
+				<?php
 					$sql = "SELECT DISTINCT teacher_id FROM teacher_to_courses;";
 					$result = $conn->query($sql);
 					while ($row = $result->fetch(PDO::FETCH_ASSOC)) { ?>
@@ -36,7 +38,7 @@
 			<div class="card-body">
 				<?php $filter_group_class = "course_id"; ?>
 				<label class="form-check">
-	  				<input class="form-check-input filter-group <?php echo $filter_group_class;?>" type="radio" name="course_id" value="ALL" checked>
+	  				<input class="form-check-input filter-group <?php echo $filter_group_class;?>" type="radio" name="my_courses" value="ALL" checked>
 	  				<span class="form-check-label">ALL</span>
 				</label>
 				<?php 
