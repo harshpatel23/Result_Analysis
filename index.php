@@ -13,6 +13,8 @@ session_start();
 					include 'filter_bar/filter_student.php';
 				}elseif ($_SESSION['user_type'] == 'teacher') {
           include 'filter_bar/filter_teacher.php';
+        }elseif ($_SESSION['user_type'] == 'hod') {
+          include 'filter_bar/filter_hod.php';
         }
 			?>
 		</div>	
@@ -57,5 +59,5 @@ session_start();
   }
   </script>
 <?php
-include 'includes/footer.html';
+include 'includes/footer.php';
 ?>
