@@ -59,5 +59,5 @@ $t_id = $_POST['t_id'];
 </div>
 
 <?php
-include "../includes/footer.html";
+include "../includes/footer.php";
 ?>
