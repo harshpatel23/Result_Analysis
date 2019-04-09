@@ -105,8 +105,8 @@
 						$condition_labels = array("10", "9", "8", "7", "6", "5", "Fail");
 					}else if ($type === "overall_gpa") {
 						$table_name = "student_cgpa";
-						$conditions = array("gpa >= 9.00 and gpa <= 10.00", "gpa >= 8.00 and gpa < 9.00", "gpa >= 7.00 and gpa < 8.00", "gpa >= 6.00 and gpa < 7.00", "gpa >= 5.00 and gpa < 6.00", "gpa >= 4.00 and gpa < 5.00", "gpa < 4.00");
-						$condition_labels = array("between 9 and 10", "between 8 and 9", "between 7 and 8", "between 6 and 7", "between 5 and 6", "between 4 and 5", "less than 4");
+						$conditions = array("gpa >= 9.00 and gpa <= 10.00", "gpa >= 8.00 and gpa < 9.00", "gpa >= 7.00 and gpa < 8.00", "gpa >= 6.00 and gpa < 7.00", "gpa >= 5.00 and gpa < 6.00", "gpa LIKE '--'");
+						$condition_labels = array("between 9 and 10", "between 8 and 9", "between 7 and 8", "between 6 and 7", "between 5 and 6", "Fail");
 					}
 					
 				break;
@@ -211,7 +211,7 @@
 				}
 			}
 			for ($i=0; $i < count($conditions); $i++) { 
-				$sql = "SELECT COUNT(*) as count FROM $table_name NATURAL JOIN teacher_to_courses NATURAL JOIN students WHERE $conditions[$i] and $course_id_sql_condition and $teacher_id_sql_condition  and seat_no like \"_$batch%\" and gender $gender_sql_symbol;";
+				$sql = "SELECT COUNT(DISTINCT seat_no) as count FROM $table_name NATURAL JOIN teacher_to_courses NATURAL JOIN students WHERE $conditions[$i] and $course_id_sql_condition and $teacher_id_sql_condition  and seat_no like \"_$batch%\" and gender $gender_sql_symbol;";
 				// echo $sql."<br>";
 				$result = $conn->query($sql);
 				$result_array = $result->fetchAll(PDO::FETCH_ASSOC);

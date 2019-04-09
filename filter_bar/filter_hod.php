@@ -1,4 +1,4 @@
-<?php include './includes/db_conn.php'; ?>\
+<?php include './includes/db_conn.php'; ?>
 <script type="text/javascript">
 	var page = "filters/hod_filter.php";
 </script>
