@@ -2,7 +2,7 @@
 <?php include '../includes/db_conn.php'; ?>
 <?php include '../includes/charts_json_wrapper.php' ?>
 <?php  
-	$teacher_id = $_SESSION['uname'];
+	// $teacher_id = $_GET['teacher_id'];
 	$conditions = array();	
 	if(isset($_GET['comparison_grp'])){
 		$comparison_grp = $_GET['comparison_grp'];
@@ -46,6 +46,9 @@
 					$gender = $comparison_values[$idx];
 					break;
 
+				case 'teacher_id':
+					break;
+
 				case "None":
 					$course_id = $_GET['course_id'];
 					$filter_condition = $_GET['filter_condition'];
@@ -54,15 +57,36 @@
 					$batch = $_GET["batch"];
 					$batch = substr($batch, -2);
 					$gender = $_GET['gender'];
+
+					// teacher_id
+					$teacher_id = $_GET['teacher_id'];
+					if($teacher_id != 'ALL'){
+						$teacher_id_sql_condition = " teacher_id = '$teacher_id'";
+					}else{
+						// $teacher_id_sql_condition = " teacher_id LIKE '%'";
+						$teacher_id_sql_condition = " teacher_id LIKE '%'"; 
+					} 
 					break;
 				default:
 					break;
 			}
-			$sql = "SELECT type from teacher_to_courses where course_id=\"".$course_id.'"';
-			$result = $conn->query($sql);
-			$data = $result->fetch(PDO::FETCH_ASSOC);
-			$type = $data["type"];
-			$outof_sql = "SELECT * FROM `course_total_marks` WHERE course_id = \"$course_id\";";
+
+			if($course_id == "ALL"){
+				$course_id_sql_condition = "course_id LIKE '%'";
+				$type = "overall_gpa";
+			}else{
+				$course_id_sql_condition = " course_id = '$course_id' ";
+				$sql = "SELECT type from teacher_to_courses where course_id = '$course_id';";
+				$result = $conn->query($sql);
+				$data = $result->fetch(PDO::FETCH_ASSOC);
+				$type = $data["type"];
+			}
+
+			// $sql = "SELECT type from teacher_to_courses where course_id = '$course_id';";
+			// $result = $conn->query($sql);
+			// $data = $result->fetch(PDO::FETCH_ASSOC);
+			// $type = $data["type"];
+			$outof_sql = "SELECT * FROM `course_total_marks` WHERE $course_id_sql_condition;";
 			$outof_result = $conn->query($outof_sql);
 			$outof_data = $outof_result->fetch(PDO::FETCH_ASSOC);
 			switch ($filter_condition) {
@@ -71,13 +95,20 @@
 					if ($type === "T") {
 						$table_name = "student_theory_marks";
 						$column_name = "total_theory_marks";
+						$conditions = array("$column_name = 10", "$column_name = 9", "$column_name = 8", "$column_name = 7", "$column_name = 6", "$column_name = 5", "$column_name = 4", );
+						$condition_labels = array("10", "9", "8", "7", "6", "5", "Fail");
 					}
 					else if ($type === "P") {
 						$table_name = "student_practical_marks";
 						$column_name = "total_practical_marks";
+						$conditions = array("$column_name = 10", "$column_name = 9", "$column_name = 8", "$column_name = 7", "$column_name = 6", "$column_name = 5", "$column_name = 4", );
+						$condition_labels = array("10", "9", "8", "7", "6", "5", "Fail");
+					}else if ($type === "overall_gpa") {
+						$table_name = "student_cgpa";
+						$conditions = array("gpa >= 9.00 and gpa <= 10.00", "gpa >= 8.00 and gpa < 9.00", "gpa >= 7.00 and gpa < 8.00", "gpa >= 6.00 and gpa < 7.00", "gpa >= 5.00 and gpa < 6.00", "gpa LIKE '--'");
+						$condition_labels = array("between 9 and 10", "between 8 and 9", "between 7 and 8", "between 6 and 7", "between 5 and 6", "Fail");
 					}
-					$conditions = array("$column_name = 10", "$column_name = 9", "$column_name = 8", "$column_name = 7", "$column_name = 6", "$column_name = 5", "$column_name = 4", );
-					$condition_labels = array("10", "9", "8", "7", "6", "5", "Fail");
+					
 				break;
 				case 'ESE':
 					$label = "ESE Marks";
@@ -180,7 +211,7 @@
 				}
 			}
 			for ($i=0; $i < count($conditions); $i++) { 
-				$sql = "SELECT COUNT(*) as count FROM $table_name NATURAL JOIN teacher_to_courses NATURAL JOIN students WHERE $conditions[$i] and course_id=\"$course_id\" and teacher_id=$teacher_id  and seat_no like \"_$batch%\" and gender $gender_sql_symbol;";
+				$sql = "SELECT COUNT(DISTINCT seat_no) as count FROM $table_name NATURAL JOIN teacher_to_courses NATURAL JOIN students WHERE $conditions[$i] and $course_id_sql_condition and $teacher_id_sql_condition  and seat_no like \"_$batch%\" and gender $gender_sql_symbol;";
 				// echo $sql."<br>";
 				$result = $conn->query($sql);
 				$result_array = $result->fetchAll(PDO::FETCH_ASSOC);

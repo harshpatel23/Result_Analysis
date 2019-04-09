@@ -34,5 +34,5 @@ session_start();
     </div>
 </body>
 <?php
-include 'includes/footer.html';
+include 'includes/footer.php';
 ?>

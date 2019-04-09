@@ -1,0 +1,16 @@
+{
+	"cols": [
+		{"id":"","label": "Range","pattern":"","type":"string"},
+		{"id":"","label": "Count","pattern":"","type":"number"},
+		{"id":"","label": "Uncount","pattern":"","type":"number"}
+	],
+	"rows": [
+		{"c": [{"v": "10","f":null},{"v": 15,"f":null},{"v": 15,"f":null}]},
+		{"c": [{"v": "9","f":null},{"v": 20,"f":null},{"v": 25,"f":null}]},
+		{"c": [{"v": "8","f":null},{"v": 9,"f":null},{"v": 10,"f":null}]},
+		{"c": [{"v": "7","f":null},{"v": 10,"f":null},{"v": 5,"f":null}]},
+		{"c": [{"v": "6","f":null},{"v": 6,"f":null},{"v": 2,"f":null}]},
+		{"c": [{"v": "5","f":null},{"v": 0,"f":null},{"v": 14,"f":null}]},
+		{"c": [{"v": "Fail","f":null},{"v": 0,"f":null},{"v": 5,"f":null}]}
+	]
+}
