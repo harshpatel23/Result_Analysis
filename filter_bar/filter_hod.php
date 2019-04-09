@@ -37,24 +37,9 @@
 		<div class="filter-content">
 			<div class="card-body">
 				<?php $filter_group_class = "course_id"; ?>
-				<label class="form-check">
-	  				<input class="form-check-input filter-group <?php echo $filter_group_class;?>" type="radio" name="my_courses" value="ALL" checked>
-	  				<span class="form-check-label">ALL</span>
-				</label>
-				<?php 
+				<div class="courses-div">
 					
-					$sql = "SELECT course_id, type FROM teacher_to_courses;";
-					$result = $conn->query($sql);
-					$flag = true;
-					while ($row = $result->fetch(PDO::FETCH_ASSOC)) { ?>
-						<label class="form-check">
-							<!-- <?php //$url = "teacher_filter.php?filter_condition=".$_SESSION['marks_type']."&course_id=".$row['course_id']; ?> -->
-		  				<input class="form-check-input filter-group <?php echo $row['type']." ".$filter_group_class;?>" type="radio" name="my_courses" value="<?php echo $row['course_id'];?>">
-		  				<span class="form-check-label"><?php echo $row['course_id'];?> </span>
-						</label>
-				<?php
-					}				
-				?>
+				</div>
 				<button type="button" onclick="change_to_checkbox('<?php echo $filter_group_class; ?>')" class="btn btn-success filter-group <?php echo $filter_group_class; ?>">Compare</button>
 			</div> <!-- card-body.// -->
 		</div>

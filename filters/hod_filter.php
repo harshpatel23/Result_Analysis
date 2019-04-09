@@ -29,6 +29,15 @@
 					$batch = $_GET["batch"];
 					$batch = substr($batch, -2);
 					$gender = $_GET['gender'];
+
+					// teacher_id
+					$teacher_id = $_GET['teacher_id'];
+					if($teacher_id != 'ALL'){
+						$teacher_id_sql_condition = " teacher_id = '$teacher_id'";
+					}else{
+						// $teacher_id_sql_condition = " teacher_id LIKE '%'";
+						$teacher_id_sql_condition = " teacher_id LIKE '%'"; 
+					} 
 					break;
 
 				case 'batch':
@@ -36,6 +45,15 @@
 					$filter_condition = $_GET['filter_condition'];
 					$batch = $comparison_values[$idx];
 					$gender = $_GET['gender'];
+
+					// teacher_id
+					$teacher_id = $_GET['teacher_id'];
+					if($teacher_id != 'ALL'){
+						$teacher_id_sql_condition = " teacher_id = '$teacher_id'";
+					}else{
+						// $teacher_id_sql_condition = " teacher_id LIKE '%'";
+						$teacher_id_sql_condition = " teacher_id LIKE '%'"; 
+					} 
 					break;
 
 				case 'gender':
@@ -44,6 +62,16 @@
 					$batch = $_GET["batch"];
 					$batch = substr($batch, -2);
 					$gender = $comparison_values[$idx];
+
+					// teacher_id
+					$teacher_id = $_GET['teacher_id'];
+					if($teacher_id != 'ALL'){
+						$teacher_id_sql_condition = " teacher_id = '$teacher_id'";
+					}else{
+						// $teacher_id_sql_condition = " teacher_id LIKE '%'";
+						$teacher_id_sql_condition = " teacher_id LIKE '%'"; 
+					} 
+
 					break;
 
 				case 'teacher_id':
@@ -72,8 +100,26 @@
 			}
 
 			if($course_id == "ALL"){
-				$course_id_sql_condition = "course_id LIKE '%'";
-				$type = "overall_gpa";
+				if($teacher_id == "ALL"){
+					$course_id_sql_condition = "course_id LIKE '%'";
+					$type = "overall_gpa";
+				}else{
+					// particular teacher selected so get all courses taught by the teacher
+					$sql = "SELECT DISTINCT course_id from teacher_to_courses where teacher_id = '$teacher_id';";
+					$result = $conn->query($sql);
+					$comma_flag = True;
+					$course_id_sql_condition = "course_id IN (";
+					while($data = $result->fetch(PDO::FETCH_ASSOC)){
+						if($comma_flag){
+							$course_id_sql_condition .= '"'.$data["course_id"].'"';
+							$comma_flag = False;
+						}else{
+							$course_id_sql_condition .= ', "' . $data["course_id"] . '"';
+						}
+					}
+					$course_id_sql_condition .= ")";
+					$type = "overall_gpa";
+				}
 			}else{
 				$course_id_sql_condition = " course_id = '$course_id' ";
 				$sql = "SELECT type from teacher_to_courses where course_id = '$course_id';";
