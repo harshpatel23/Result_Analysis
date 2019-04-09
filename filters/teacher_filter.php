@@ -179,17 +179,51 @@
 					$final_metadata[] = array($comparison_values[$i], $comparison_values[$i], "number");
 				}
 			}
+			$table_rows = array();
 			for ($i=0; $i < count($conditions); $i++) { 
-				$sql = "SELECT COUNT(*) as count FROM $table_name NATURAL JOIN teacher_to_courses NATURAL JOIN students WHERE $conditions[$i] and course_id=\"$course_id\" and teacher_id=$teacher_id  and seat_no like \"_$batch%\" and gender $gender_sql_symbol;";
+				$sql = "SELECT COUNT(*) as count 
+						FROM $table_name NATURAL JOIN teacher_to_courses NATURAL JOIN students 
+						WHERE $conditions[$i] 
+							and course_id=\"$course_id\" 
+							and teacher_id=$teacher_id  
+							and seat_no like \"_$batch%\" 
+							and gender $gender_sql_symbol;";
+
+				$table_data_sql = "SELECT seat_no, `name`, gender, ese_marks, ca_marks, total_theory_marks as pointer  
+									FROM $table_name NATURAL JOIN teacher_to_courses NATURAL JOIN students 
+									WHERE $conditions[$i] 
+										and course_id=\"$course_id\" 
+										and teacher_id=$teacher_id 
+										and seat_no like \"_$batch%\" 
+										and gender $gender_sql_symbol;";
+				
+				$columns = array("seat_no", "name", "gender", "ese_marks", "ca_marks", "pointer");
+				// echo $table_data_sql;
+				// echo '<br>';
+
 				// echo $sql."<br>";
 				$result = $conn->query($sql);
 				$result_array = $result->fetchAll(PDO::FETCH_ASSOC);
 				$count = $result_array[0]["count"];
 				$final_data[$i]['range'] = $condition_labels[$i];
 				$final_data[$i][$comparison_values[$idx]] = $count;
+
+				// table data (rows)
+				$table_data = $conn->query($table_data_sql);
+				$result_array = $table_data->fetchAll(PDO::FETCH_ASSOC);
+				$table_rows[$condition_labels[$i]] = $result_array;
+				// echo $condition_labels[$i];
+				// echo '<br>';
+				
+				// echo "<pre> "; print_r($result_array); echo " </pre>";
 			}
 		} // [FOR LOOP END]
 		// echo "<pre> "; print_r($final_data); echo " </pre>";
 		// echo "<pre> "; print_r($final_metadata); echo " </pre>";
-		echo returnJSONString($final_data, $final_metadata);
+		$data = array();
+		$data['columns'] = $columns;
+		$data['rows'] = $table_rows;
+		$data['chart_data'] = json_decode(returnJSONString($final_data, $final_metadata));
+		echo json_encode($data);
+
 ?>

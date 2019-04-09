@@ -21,9 +21,22 @@ session_start();
 		<div  class="col-sm-9 container-fluid">
       <div class="row">
         <div id="col-chart"></div>
-      <div id="bar-chart"></div>
+        <div id="bar-chart"></div>
       </div>
-      
+      <div class="row">
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
+          <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
+          <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
+        </div>
+        <div class="tab-content" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">...</div> 
+          <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+          <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+        </div>
+      </nav>
+      </div>
 		</div>
 	</div>
 </div>
@@ -40,8 +53,8 @@ session_start();
       async: false
       }).responseText;
   	// Create our data table out of JSON data loaded from server.
-    console.log(jsonData);
-    var data = new google.visualization.DataTable(jsonData);
+    console.log(JSON.parse(jsonData));
+    var data = new google.visualization.DataTable(JSON.parse(jsonData)['chart_data']);
 
     // Instantiate and draw our chart, passing in some options.
     if (type_chart == 'column_chart') {
