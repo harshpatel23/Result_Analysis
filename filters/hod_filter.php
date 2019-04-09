@@ -105,7 +105,7 @@
 						$condition_labels = array("10", "9", "8", "7", "6", "5", "Fail");
 					}else if ($type === "overall_gpa") {
 						$table_name = "student_cgpa";
-						$conditions = array("gpa >= 9 and gpa <=10", "gpa >= 8 and gpa < 9", "gpa >= 7 and gpa < 8", "gpa >= 6 and gpa < 5", "gpa >= 4 and gpa < 5", "gpa < 4");
+						$conditions = array("gpa >= 9.00 and gpa <= 10.00", "gpa >= 8.00 and gpa < 9.00", "gpa >= 7.00 and gpa < 8.00", "gpa >= 6.00 and gpa < 7.00", "gpa >= 5.00 and gpa < 6.00", "gpa >= 4.00 and gpa < 5.00", "gpa < 4.00");
 						$condition_labels = array("between 9 and 10", "between 8 and 9", "between 7 and 8", "between 6 and 7", "between 5 and 6", "between 4 and 5", "less than 4");
 					}
 					
