@@ -120,4 +120,4 @@
 			<input class="btn btn-primary" type="submit" name="submit" class="form-control">
 		</form>
 	</div>
-<?php include 'includes/footer.html'; ?>
+<?php include 'includes/footer.php'; ?>
