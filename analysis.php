@@ -28,6 +28,10 @@ include 'includes/header.html';
     margin: auto;
   }
 
+  #print{
+    margin-left: 75%;
+  }
+  
   @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
@@ -38,6 +42,7 @@ include 'includes/header.html';
   <h1>K. J. Somaiya College of Engineering</h1>
   <h2>Semester 1 Result Analysis</h2>
 </div>
+<div id="printpdf">
 <div class="result-table-div">
   <div class="loader"></div>
   <table class="table table-bordered result-table" id="total">
@@ -197,6 +202,9 @@ include 'includes/header.html';
     </tbody>
   </table>
 </div>
+</div>
+
+<button id="print" type="button" class="btn btn-primary" onclick="printpdf()">Export as PDF</button>
 
 
 <?php 
