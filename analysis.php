@@ -1,9 +1,10 @@
 <?php 
 include 'includes/header.html';
 ?>
+<script type="text/javascript" src="scripts/analysis.js"></script>
 <style type="text/css">
   .result-table-div{
-    width: 70%;
+    width: 60%;
     margin: auto;
   }
   .result-table{
@@ -16,6 +17,21 @@ include 'includes/header.html';
     margin: auto;
     text-align: center;
   }
+
+  .loader {
+    border: 5px solid #f3f3f3; /* Light grey */
+    border-top: 5px solid #a1a1a1; /* Blue */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 2s linear infinite;
+    margin: auto;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
 </style>
 
 <div id="header-div">
@@ -23,6 +39,7 @@ include 'includes/header.html';
   <h2>Semester 1 Result Analysis</h2>
 </div>
 <div class="result-table-div">
+  <div class="loader"></div>
   <table class="table table-bordered result-table">
     <thead>
       <tr>
@@ -42,6 +59,7 @@ include 'includes/header.html';
 </div>
 
 <div class="result-table-div">
+  <div class="loader"></div>
   <table class="table table-bordered result-table">
     <thead>
       <tr>
@@ -61,6 +79,7 @@ include 'includes/header.html';
 </div>
 
 <div class="result-table-div">
+  <div class="loader"></div>
   <table class="table table-bordered result-table">
     <thead>
       <tr>
@@ -80,6 +99,7 @@ include 'includes/header.html';
 </div>
 
 <div class="result-table-div">
+  <div class="loader"></div>
   <table class="table table-bordered result-table">
     <thead>
       <tr>
@@ -99,6 +119,7 @@ include 'includes/header.html';
 </div>
 
 <div class="result-table-div">
+  <div class="loader"></div>
   <table class="table table-bordered result-table">
     <thead>
       <tr>
@@ -133,6 +154,7 @@ include 'includes/header.html';
 </div>
 
 <div class="result-table-div">
+  <div class="loader"></div>
   <table class="table table-bordered result-table">
     <thead>
       <tr>
