@@ -36,7 +36,7 @@
 			}
 
 			// add 0 in front of roll no, this will later be replaced by semester no
-			$data[1] = sprintf("0%s",$data[1]);
+			// $data[1] = sprintf("0%s",$data[1]);
 
 			$sql_format = "INSERT INTO students VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')";
 
