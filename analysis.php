@@ -1,6 +1,7 @@
 <?php 
 include 'includes/header.html';
 ?>
+<script type="text/javascript" src="scripts/analysis.js"></script>
 <style type="text/css">
   .result-table-div{
     width: 70%;
@@ -16,6 +17,21 @@ include 'includes/header.html';
     margin: auto;
     text-align: center;
   }
+
+  .loader {
+    border: 5px solid #f3f3f3; /* Light grey */
+    border-top: 5px solid #a1a1a1; /* Blue */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 2s linear infinite;
+    margin: auto;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
 </style>
 
 <div id="header-div">
@@ -23,7 +39,8 @@ include 'includes/header.html';
   <h2>Semester 1 Result Analysis</h2>
 </div>
 <div class="result-table-div">
-  <table class="table table-bordered result-table">
+  <div class="loader"></div>
+  <table class="table table-bordered result-table" id="total">
     <thead>
       <tr>
         <th scope="col"></th>
@@ -42,7 +59,8 @@ include 'includes/header.html';
 </div>
 
 <div class="result-table-div">
-  <table class="table table-bordered result-table">
+  
+  <table class="table table-bordered result-table" id="total-rv">
     <thead>
       <tr>
         <th scope="col"></th>
@@ -52,7 +70,7 @@ include 'includes/header.html';
     </thead>
     <tbody>
       <tr>
-        <th scope="row">Number of Students passed Semester 1 Before reassesment/reverification without KT</th>
+        <th scope="row">Number of Students passed Semester 1 Before reassesment / reverification without KT</th>
         <td></td>
         <td></td>
       </tr>
@@ -61,7 +79,8 @@ include 'includes/header.html';
 </div>
 
 <div class="result-table-div">
-  <table class="table table-bordered result-table">
+  
+  <table class="table table-bordered result-table" id="minority">
     <thead>
       <tr>
         <th scope="col"></th>
@@ -80,7 +99,8 @@ include 'includes/header.html';
 </div>
 
 <div class="result-table-div">
-  <table class="table table-bordered result-table">
+  
+  <table class="table table-bordered result-table"rv id="minority-">
     <thead>
       <tr>
         <th scope="col"></th>
@@ -90,7 +110,7 @@ include 'includes/header.html';
     </thead>
     <tbody>
       <tr>
-        <th scope="row">Number of Minority Students passed Semester 1 Before reassesment/reverification without KT</th>
+        <th scope="row">Number of Minority Students passed Semester 1 Before reassesment / reverification without KT</th>
         <td></td>
         <td></td>
       </tr>
@@ -99,7 +119,8 @@ include 'includes/header.html';
 </div>
 
 <div class="result-table-div">
-  <table class="table table-bordered result-table">
+  
+  <table class="table table-bordered result-table" id="kt">
     <thead>
       <tr>
         <th scope="col"></th>
@@ -133,7 +154,8 @@ include 'includes/header.html';
 </div>
 
 <div class="result-table-div">
-  <table class="table table-bordered result-table">
+  
+  <table class="table table-bordered result-table" id="grade-point">
     <thead>
       <tr>
         <th scope="col"></th>
