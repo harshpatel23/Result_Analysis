@@ -90,6 +90,53 @@ for ($i=0; $i < count($pointers)-1; $i++) {
     array_push($grade_pt, $temp);
 }
 $data["grade-point"] = $grade_pt;
+
+
+// KT in theory subject
+//male
+$kt_count_male = array();
+$sql9 = 'SELECT t.seat_no 
+FROM student_theory_marks t inner join students s 
+ON SUBSTR(t.seat_no, 2, LENGTH(t.seat_no) - 1) = s.seat_no 
+WHERE t.total_theory_marks = "--" and t.seat_no LIKE "1%" and s.gender <> "/";';
+$result = $conn->query($sql9);
+$result_array = $result->fetchAll(PDO::FETCH_NUM);
+
+for ($i=0; $i < count($result_array); $i++) { 
+    if (!array_key_exists($result_array[$i][0], $kt_count_male))
+        $kt_count_male[$result_array[$i][0]] = 0;
+    $kt_count_male[$result_array[$i][0]]++;
+}
+
+//female
+$kt_count_female = array();
+$sql10 = 'SELECT t.seat_no 
+FROM student_theory_marks t inner join students s 
+ON SUBSTR(t.seat_no, 2, LENGTH(t.seat_no) - 1) = s.seat_no 
+WHERE t.total_theory_marks = "--" and t.seat_no LIKE "1%" and s.gender = "/";';
+$result = $conn->query($sql10);
+$result_array = $result->fetchAll(PDO::FETCH_NUM);
+
+for ($i=0; $i < count($result_array); $i++) { 
+    if (!array_key_exists($result_array[$i][0], $kt_count_female))
+        $kt_count_female[$result_array[$i][0]] = 0;
+    $kt_count_female[$result_array[$i][0]]++;
+}
+
+$num_kt = array(
+    array("male" => 0, "female" => 0),
+    array("male" => 0, "female" => 0),
+    array("male" => 0, "female" => 0),
+    array("male" => 0, "female" => 0),
+);
+
+foreach ($kt_count_male as $seat_no => $count_kt) {
+    $num_kt[$count_kt-1]["male"] += 1;
+}
+foreach ($kt_count_female as $seat_no => $count_kt) {
+    $num_kt[$count_kt-1]["female"] += 1;
+}
+$data["kt"] = $num_kt;
 echo json_encode($data);
 
 ?>
