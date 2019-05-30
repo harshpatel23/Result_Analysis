@@ -1,5 +1,5 @@
 $.get(
-    "/final_analysis/total.php",
+    "./final_analysis/total.php",
     function(data,status,xhr){
         // stop loading
         $(".loader").remove();
