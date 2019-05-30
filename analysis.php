@@ -4,7 +4,7 @@ include 'includes/header.html';
 <script type="text/javascript" src="scripts/analysis.js"></script>
 <style type="text/css">
   .result-table-div{
-    width: 60%;
+    width: 70%;
     margin: auto;
   }
   .result-table{
@@ -40,7 +40,7 @@ include 'includes/header.html';
 </div>
 <div class="result-table-div">
   <div class="loader"></div>
-  <table class="table table-bordered result-table">
+  <table class="table table-bordered result-table" id="total">
     <thead>
       <tr>
         <th scope="col"></th>
@@ -59,8 +59,8 @@ include 'includes/header.html';
 </div>
 
 <div class="result-table-div">
-  <div class="loader"></div>
-  <table class="table table-bordered result-table">
+  
+  <table class="table table-bordered result-table" id="total-rv">
     <thead>
       <tr>
         <th scope="col"></th>
@@ -70,7 +70,7 @@ include 'includes/header.html';
     </thead>
     <tbody>
       <tr>
-        <th scope="row">Number of Students passed Semester 1 Before reassesment/reverification without KT</th>
+        <th scope="row">Number of Students passed Semester 1 Before reassesment / reverification without KT</th>
         <td></td>
         <td></td>
       </tr>
@@ -79,8 +79,8 @@ include 'includes/header.html';
 </div>
 
 <div class="result-table-div">
-  <div class="loader"></div>
-  <table class="table table-bordered result-table">
+  
+  <table class="table table-bordered result-table" id="minority">
     <thead>
       <tr>
         <th scope="col"></th>
@@ -99,8 +99,8 @@ include 'includes/header.html';
 </div>
 
 <div class="result-table-div">
-  <div class="loader"></div>
-  <table class="table table-bordered result-table">
+  
+  <table class="table table-bordered result-table"rv id="minority-">
     <thead>
       <tr>
         <th scope="col"></th>
@@ -110,7 +110,7 @@ include 'includes/header.html';
     </thead>
     <tbody>
       <tr>
-        <th scope="row">Number of Minority Students passed Semester 1 Before reassesment/reverification without KT</th>
+        <th scope="row">Number of Minority Students passed Semester 1 Before reassesment / reverification without KT</th>
         <td></td>
         <td></td>
       </tr>
@@ -119,8 +119,8 @@ include 'includes/header.html';
 </div>
 
 <div class="result-table-div">
-  <div class="loader"></div>
-  <table class="table table-bordered result-table">
+  
+  <table class="table table-bordered result-table" id="kt">
     <thead>
       <tr>
         <th scope="col"></th>
@@ -154,8 +154,8 @@ include 'includes/header.html';
 </div>
 
 <div class="result-table-div">
-  <div class="loader"></div>
-  <table class="table table-bordered result-table">
+  
+  <table class="table table-bordered result-table" id="grade-point">
     <thead>
       <tr>
         <th scope="col"></th>
