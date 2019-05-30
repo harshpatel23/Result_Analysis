@@ -180,7 +180,8 @@
 				}
 			}
 			for ($i=0; $i < count($conditions); $i++) { 
-				$sql = "SELECT COUNT(*) as count FROM $table_name NATURAL JOIN teacher_to_courses NATURAL JOIN students WHERE $conditions[$i] and course_id=\"$course_id\" and teacher_id=$teacher_id  and seat_no like \"_$batch%\" and gender $gender_sql_symbol;";
+				// $sql = "SELECT COUNT(*) as count FROM $table_name NATURAL JOIN teacher_to_courses NATURAL JOIN students WHERE $conditions[$i] and course_id=\"$course_id\" and teacher_id=$teacher_id  and seat_no like \"_$batch%\" and gender $gender_sql_symbol;";
+				$sql = "SELECT COUNT(*) as count FROM (SELECT * FROM $table_name NATURAL JOIN teacher_to_courses WHERE $conditions[$i] and course_id=\"$course_id\" and teacher_id=$teacher_id  and seat_no like \"_$batch%\") a JOIN students as b on a.seat_no LIKE CONCAT('%', b.seat_no ,'%')";
 				// echo $sql."<br>";
 				$result = $conn->query($sql);
 				$result_array = $result->fetchAll(PDO::FETCH_ASSOC);

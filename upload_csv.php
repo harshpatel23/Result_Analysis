@@ -59,7 +59,7 @@
 			];
 			$conn->query($sql_array[0]);
 			$conn->query($sql_array[1]);
-			$conn->query($sql_array[2]);
+			// $conn->query($sql_array[2]);
 			$conn->query($sql_array[3]);
 			$row_no++;
 		}
