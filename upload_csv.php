@@ -5,15 +5,17 @@
 	if ( isset($_POST["submit"]) ) {
 		$dept_no = $_POST["dept_no"];
 		$sem_no = $_POST["sem_no"];
-  	if ( isset($_FILES["file"])) {
+  	if ( isset($_FILES["after_verify_csv_file"]) && isset($_FILES["b4_verify_csv_file"]) ) {
       //if there was an error uploading the file
-      if ($_FILES["file"]["error"] > 0) {
-          echo "Return Code: " . $_FILES["file"]["error"] . "<br>";
+      if ($_FILES["after_verify_csv_file"]["error"] > 0 && $_FILES["b4_verify_csv_file"]["error"] > 0) {
+          echo "Return Code: " . $_FILES["after_verify_csv_file"]["error"] . "<br>" . $_FILES["b4_verify_csv_file"]["error"] . "<br>";
       }
       else {
         //Store file in directory "upload" with the name of "uploaded_file.txt"
-        $storagename = $_FILES["file"]["name"];
-        move_uploaded_file($_FILES["file"]["tmp_name"], "upload/" . $storagename);
+        $storagename = $_FILES["after_verify_csv_file"]["name"];
+        $storagename_b4_verify = $_FILES["b4_verify_csv_file"]["name"];
+        move_uploaded_file($_FILES["after_verify_csv_file"]["tmp_name"], "upload/" . $storagename);
+        move_uploaded_file($_FILES["b4_verify_csv_file"]["tmp_name"], "upload/" . $storagename_b4_verify);
         }
     } else {
         echo "No file selected <br>";
@@ -35,7 +37,7 @@
 			}
 			
 			$row_no ++;
-	  }
+	  	}
 	  // print_r($csv_array[0]);
 		fclose($file);
 		$row_no = 0;
@@ -74,6 +76,13 @@
 		("'.$courses_name["exam65"].$sem_no.$dept_no.'", "", "", "'.$course_outof_marks["exam65"].'", "'.$course_outof_marks["exam67"].'"), 
 		("'.$courses_name["exam69"].$sem_no.$dept_no.'", "", "", "'.$course_outof_marks["exam69"].'", "'.$course_outof_marks["exam71"].'")';
 		$conn->query($sql);
+
+
+		// Before verify data update
+
+
+
+
 		if ($conn->errorCode() == 0) {
 ?>
 		<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -99,25 +108,39 @@
 	<div class="container-fluid">
 		<br><br>
 		<form method="POST" action="" enctype="multipart/form-data">
-			<select class="form-control" name="dept_no" required>
-				<option value="1">Computer</option>
-				<option value="2">IT</option>
-				<option value="3">Mech</option>
-				<option value="4">ETRX</option>
-				<option value="5">EXTC</option>
-			</select><br>
-			<select class="form-control" name="sem_no" required>
-				<option value="1">sem 1</option>
-				<option value="2">sem 2</option>
-				<option value="3">sem 3</option>
-				<option value="4">sem 4</option>
-				<option value="5">sem 5</option>
-				<option value="6">sem 6</option>
-				<option value="7">sem 7</option>
-				<option value="8">sem 8</option>
-			</select><br>
-			<input type="file" name="file" id="csv_file" required><br><br>
-			<input class="btn btn-primary" type="submit" name="submit" class="form-control">
+			<div class="container-fluid">
+				<label for="dept_no">Select Department</label>
+				<select class="form-control" name="dept_no" required id="dept_no">
+					<option value="1">Computer</option>
+					<option value="2">IT</option>
+					<option value="3">Mech</option>
+					<option value="4">ETRX</option>
+					<option value="5">EXTC</option>
+				</select><br>
+				<label for="sem_no">Select Semester No</label>
+				<select class="form-control" name="sem_no" required id="sem_no">
+					<option value="1">sem 1</option>
+					<option value="2">sem 2</option>
+					<option value="3">sem 3</option>
+					<option value="4">sem 4</option>
+					<option value="5">sem 5</option>
+					<option value="6">sem 6</option>
+					<option value="7">sem 7</option>
+					<option value="8">sem 8</option>
+				</select><br>
+			
+				<div class="row">
+					<div class="col-lg-6">
+						<label for="b4_verify_csv_file">Result File Before Re-verification (CSV Format only)</label>
+						<input type="file" name="file" id="b4_verify_csv_file" required><br><br>
+					</div>
+    				<div class="col-lg-6">
+    					<label for="after_verify_csv_file">Result File After Re-verification (CSV Format only)</label>
+    					<input type="file" name="after_verify_csv_file" id="after_verify_csv_file" required><br><br>
+    				</div>
+				</div>
+				<input class="btn btn-primary" type="submit" name="submit" class="form-control">				
+			</div>
 		</form>
 	</div>
 <?php include 'includes/footer.php'; ?>
