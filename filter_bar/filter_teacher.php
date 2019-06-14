@@ -4,54 +4,60 @@
 </script>
 
 <ul>
-	<li class="label" style="color: white">My Courses</li>
-	<li style="padding-left: 20px;">
-		<div class="filter-content">
-				<?php 
-					$filter_group_class = "course_id";
-					$sql = "SELECT course_id, type FROM teacher_to_courses WHERE teacher_id = ".$_SESSION['uname'].";";
-					$result = $conn->query($sql);
-					$flag = true;
-					while ($row = $result->fetch(PDO::FETCH_ASSOC)) { ?>
-						<label class="form-check">
-		  				<input class="form-check-input filter-group <?php echo $row['type']." ".$filter_group_class;?>" type="radio" name="my_courses" value="<?php echo $row['course_id'];?>"<?php 
-		  					if($flag) {
-		  						echo "checked";
-		  						$flag = false;
-		  					}?>>
-		  				<span class="form-check-label"><?php echo $row['course_id'];?> </span>
-						</label>
-				<?php
-					}				
-				?>
-				<button type="button" onclick="change_to_checkbox('<?php echo $filter_group_class; ?>')" class="btn btn-success filter-group <?php echo $filter_group_class; ?>">Compare</button>
-		</div>
+	<li><a class="sidebar-sub-toggle">My Courses<span class="sidebar-collapse-icon ti-angle-down"></span></a>
+		<ul>
+		<li style="padding-left: 20px;">
+			<div class="filter-content">
+					<?php 
+						$filter_group_class = "course_id";
+						$sql = "SELECT course_id, type FROM teacher_to_courses WHERE teacher_id = ".$_SESSION['uname'].";";
+						$result = $conn->query($sql);
+						$flag = true;
+						while ($row = $result->fetch(PDO::FETCH_ASSOC)) { ?>
+							<label class="form-check">
+			  				<input class="form-check-input filter-group <?php echo $row['type']." ".$filter_group_class;?>" type="radio" name="my_courses" value="<?php echo $row['course_id'];?>"<?php 
+			  					if($flag) {
+			  						echo "checked";
+			  						$flag = false;
+			  					}?>>
+			  				<span class="form-check-label"><?php echo $row['course_id'];?> </span>
+							</label>
+					<?php
+						}				
+					?>
+					<button type="button" onclick="change_to_checkbox('<?php echo $filter_group_class; ?>')" class="btn btn-success filter-group <?php echo $filter_group_class; ?>">Compare</button>
+			</div>
+		</li>
+		</ul>
 	</li>
 
-	<li class="label" style="color: white">Marks Type</li>
-	<li style="padding-left: 20px;">
-		<div class="filter-content">
-				<?php 
-					$filter_group_class = "filter_condition";
-					$arr = array("TOTAL", "ESE", "CA", "ORAL", "TW");
-					for($i = 0; $i < count($arr); $i++){?>
-						<label class="form-check">
-			  				<input class="form-check-input filter-group <?php echo $arr[$i]." ".$filter_group_class ?>" type="radio" name="marks_type" value="<?php echo $arr[$i];?>" <?php 
-			  				if($arr[$i] == "TOTAL")
-			  					echo "checked";
-			  				 ?>>
-			  				<span class="form-check-label"><?php echo $arr[$i];?> </span>
-						</label>
-				<?php
-					}				
-				?>
-				<button type="button" onclick="change_to_checkbox('<?php echo $filter_group_class; ?>')" class="btn btn-success <?php echo $filter_group_class ;?> filter-group">Compare</button>
-		</div>
-	</li>
+	<li><a class="sidebar-sub-toggle">Marks Type<span class="sidebar-collapse-icon ti-angle-down"></span></a>
+		<ul>
+		<li style="padding-left: 20px;">
+			<div class="filter-content">
+					<?php 
+						$filter_group_class = "filter_condition";
+						$arr = array("TOTAL", "ESE", "CA", "ORAL", "TW");
+						for($i = 0; $i < count($arr); $i++){?>
+							<label class="form-check">
+				  				<input class="form-check-input filter-group <?php echo $arr[$i]." ".$filter_group_class ?>" type="radio" name="marks_type" value="<?php echo $arr[$i];?>" <?php 
+				  				if($arr[$i] == "TOTAL")
+				  					echo "checked";
+				  				 ?>>
+				  				<span class="form-check-label"><?php echo $arr[$i];?> </span>
+							</label>
+					<?php
+						}				
+					?>
+					<button type="button" onclick="change_to_checkbox('<?php echo $filter_group_class; ?>')" class="btn btn-success <?php echo $filter_group_class ;?> filter-group">Compare</button>
+			</div>
+		</li>
+		</ul>
 
-	<li class="label" style="color: white">Batch</li>
-	<li style="padding-left: 20px;">
-		<div class="filter-content">
+	<li><a class="sidebar-sub-toggle">Batch<span class="sidebar-collapse-icon ti-angle-down"></span></a>
+		<ul>
+		<li style="padding-left: 20px;">
+			<div class="filter-content">
 				<?php 
 				$filter_group_class = "batch"; 
 				?>
@@ -59,25 +65,28 @@
 					
 				</div>
 				<button type="button" onclick="change_to_checkbox('<?php echo $filter_group_class; ?>')" class="btn btn-success <?php echo $filter_group_class ;?> filter-group">Compare</button>
-		</div>
-	</li>	
+			</div>
+		</li>	
+		</ul>
 
-	<li class="label" style="color: white">Gender</li>
-	<li style="padding-left: 20px;">
-		<div class="filter-content">
-				<?php 
-					$filter_group_class = "gender";
-					$arr = array("BOTH", "MALE", "FEMALE");
-					for($i = 0; $i < count($arr); $i++){?>
-						<label class="form-check">
-			  				<input class="form-check-input filter-group <?php echo $arr[$i]." ".$filter_group_class ?>" type="radio" name="gender" value="<?php echo $arr[$i];?>" <?php if($arr[$i] == "BOTH")
-			  								echo "checked"; ?>>
-			  				<span class="form-check-label"><?php echo $arr[$i];?> </span>
-						</label>
-				<?php
-					}				
-				?>
-				<button type="button" onclick="change_to_checkbox('<?php echo $filter_group_class; ?>')" class="btn btn-success <?php echo $filter_group_class ;?> filter-group">Compare</button>
-		</div>
-	</li>
+	<li><a class="sidebar-sub-toggle">Gender<span class="sidebar-collapse-icon ti-angle-down"></span></a>
+		<ul>
+			<li style="padding-left: 20px;">
+				<div class="filter-content">
+						<?php 
+							$filter_group_class = "gender";
+							$arr = array("BOTH", "MALE", "FEMALE");
+							for($i = 0; $i < count($arr); $i++){?>
+								<label class="form-check">
+					  				<input class="form-check-input filter-group <?php echo $arr[$i]." ".$filter_group_class ?>" type="radio" name="gender" value="<?php echo $arr[$i];?>" <?php if($arr[$i] == "BOTH")
+					  								echo "checked"; ?>>
+					  				<span class="form-check-label"><?php echo $arr[$i];?> </span>
+								</label>
+						<?php
+							}				
+						?>
+						<button type="button" onclick="change_to_checkbox('<?php echo $filter_group_class; ?>')" class="btn btn-success <?php echo $filter_group_class ;?> filter-group">Compare</button>
+				</div>
+			</li>
+		</ul>
 </ul>

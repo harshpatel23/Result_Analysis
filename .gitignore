@@ -1,3 +1,5 @@
 .idea
 .directory
 upload/*.csv
+*.sublime-project
+*.sublime-workspace
