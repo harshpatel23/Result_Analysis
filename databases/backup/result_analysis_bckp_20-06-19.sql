@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 20, 2019 at 07:37 AM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.1.27
+-- Generation Time: May 30, 2019 at 05:56 PM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 7.3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -8024,26 +8024,6 @@ INSERT INTO `teacher_to_courses` (`teacher_id`, `course_id`, `year`, `batch`, `t
 ('9999002', 'COURSE-311', '2015', 'A', 'T'),
 ('9999002', 'COURSE-711', '2017', 'B1', 'P');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
-
-CREATE TABLE `users` (
-  `id` varchar(15) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `role` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `password`, `role`) VALUES
-('9999001', '$2y$10$DOGTTsjiGUFCwIuCnHBxTuDnKRjO/mDHv4gx6yHkxfpmUXdzhGqxG', 'teacher'),
-('9999002', '$2y$10$ZcpCX5h8TTCpq.Is9vEID.fua28CxFMrzZlDdyWo.qyMd4rH5/Qfa', 'hod_comps');
-
 --
 -- Indexes for dumped tables
 --
@@ -8071,12 +8051,6 @@ ALTER TABLE `student_cgpa`
 --
 ALTER TABLE `teacher_to_courses`
   ADD PRIMARY KEY (`teacher_id`,`course_id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
