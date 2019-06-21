@@ -4,8 +4,9 @@ include 'includes/header.html';
 <script type="text/javascript" src="scripts/analysis.js"></script>
 <style type="text/css">
   .result-table-div{
-    width: 70%;
+    width: 50%;
     margin: auto;
+    padding: 20px 0px;
   }
   .result-table{
     table-layout: fixed;

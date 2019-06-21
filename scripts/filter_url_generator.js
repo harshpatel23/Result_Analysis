@@ -68,8 +68,6 @@ function apply_filter() {
 			page += "&"+filter+"="+checked[filter];
 	}
 
-	console.log("checked");
-	console.log(checked);
 	console.log("url");
 	console.log(page);
 	refreshChart(page, "pie_chart");

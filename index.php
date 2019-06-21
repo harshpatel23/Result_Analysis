@@ -155,16 +155,22 @@ session_start();
     // Instantiate and draw our chart, passing in some options.
     if (type_chart == 'column_chart') {
       var chart = new google.visualization.ColumnChart(document.getElementById('col-chart'));
-      chart.draw(data, {width: 500, height: 500, vAxis: { 
+      chart.draw(data, {width: 600, height: 500, vAxis: { 
                 title: "No of Students", 
                 viewWindowMode:'explicit',
                 viewWindow:{
                 }
               }});
+      make_table(jsonData);
+
     }else if (type_chart == 'pie_chart') {
       var chart = new google.visualization.PieChart(document.getElementById('bar-chart'));
       chart.draw(data, {width: 400, height: 400});
     }
+  }
+
+  function make_table(data) {
+    console.log(jsonData);
   }
   </script>
 <?php
