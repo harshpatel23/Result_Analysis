@@ -6,6 +6,19 @@ session_start();
     <div id="login">
         <h3 class="text-center text-white pt-5">Login form</h3>
         <div class="container">
+            <?php
+            if(isset($_SESSION['password_incorrect']) && $_SESSION['password_incorrect'] === true ){
+                $_SESSION['password_incorrect'] = false;
+            ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <strong>Error!!!</strong> Incorrent Password!.
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+            <?php
+            }
+            ?>
             <div id="login-row" class="row justify-content-center align-items-center">
                 <div id="login-column" class="col-md-6">
                     <div id="login-box" class="col-md-12" style="border: solid; border-color: #42CDF1; border-radius: 10px; padding: 20px">
