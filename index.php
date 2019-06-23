@@ -81,51 +81,31 @@ session_start();
 
                     <div class="col-lg-5">
                         <div class="card">
-
+                            <div class="card-title pr">
+                                <h4>Index</h4>
+                            </div>
                             <div class="card-body">
-                                <div id="bar-chart"></div>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr id="table-head">
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody id="table-body">
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-5">
                         <div class="card">
-                            <div class="card-title pr">
-                                <h4>All Exam Result</h4>
-
-                            </div>
                             <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table student-data-table m-t-20">
-                                        <thead>
-                                            <tr>
-                                                <th><label><input type="checkbox" value=""></label>Exam Name</th>
-                                                <th>Subject</th>
-                                                <th>Grade Point</th>
-                                                <th>Percent Form</th>
-                                                <th>Percent Upto</th>
-                                                <th>Date</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Class Test</td>
-                                                <td>Mathmatics</td>
-                                                <td>
-                                                    4.00
-                                                </td>
-                                                <td>
-                                                    95.00
-                                                </td>
-                                                <td>
-                                                    100
-                                                </td>
-                                                <td>20/04/2017</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                <div id="pie-chart"></div>
                             </div>
                         </div>
                     </div>
@@ -164,14 +144,34 @@ session_start();
       make_table(jsonData);
 
     }else if (type_chart == 'pie_chart') {
-      var chart = new google.visualization.PieChart(document.getElementById('bar-chart'));
+      var chart = new google.visualization.PieChart(document.getElementById('pie-chart'));
       chart.draw(data, {width: 400, height: 400});
     }
   }
 
   function make_table(data) {
-    console.log(jsonData);
-  }
+        console.log("Making Table");
+        data = JSON.parse(data);
+        num_cols = data["cols"].length;
+        num_rows = data["rows"].length;
+
+        $("#table-head").empty();
+        $("#table-body").empty();
+
+        for (var i = 0; i < num_cols; i++) {
+            col_name = data["cols"][i]["label"];
+            $("#table-head").append('<th scope="col">'+col_name+'</th>');
+        }
+        for (var i = 0; i < num_rows; i++) {
+            row = "<tr>";
+            for (var j = 0; j < num_cols; j++) {
+                row_data = data["rows"][i]["c"][j]["v"];
+                row += '<td>'+row_data+'</td>';
+            }
+            row += "</tr>";
+            $("#table-body").append(row);
+        }
+    }
   </script>
 <?php
 include 'includes/footer.php';
