@@ -101,7 +101,7 @@ session_start();
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-lg-5">
                         <div class="card">
                             <div class="card-body">
@@ -110,7 +110,7 @@ session_start();
                         </div>
                     </div>
                     <!-- /# column -->
-                </div>
+                </div> -->
             </section>
         </div>
     </div>
@@ -144,8 +144,8 @@ session_start();
       make_table(jsonData);
 
     }else if (type_chart == 'pie_chart') {
-      var chart = new google.visualization.PieChart(document.getElementById('pie-chart'));
-      chart.draw(data, {width: 400, height: 400});
+      // var chart = new google.visualization.PieChart(document.getElementById('pie-chart'));
+      // chart.draw(data, {width: 400, height: 400});
     }
   }
 
