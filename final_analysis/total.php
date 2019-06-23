@@ -1,6 +1,7 @@
 <?php
+session_start();
 include '../includes/db_conn.php';
-$sem = 1;
+$sem = $_SESSION["sem-select"];
 $data = array();
 // Number of students passed without KT
 // male
@@ -98,7 +99,7 @@ $kt_count_male = array();
 $sql9 = 'SELECT t.seat_no 
 FROM student_theory_marks t inner join students s 
 ON SUBSTR(t.seat_no, 2, LENGTH(t.seat_no) - 1) = s.seat_no 
-WHERE t.total_theory_marks = "--" and t.seat_no LIKE "1%" and s.gender <> "/";';
+WHERE t.total_theory_marks = "--" and t.seat_no LIKE "'.$sem.'%" and s.gender <> "/";';
 $result = $conn->query($sql9);
 $result_array = $result->fetchAll(PDO::FETCH_NUM);
 
@@ -113,7 +114,7 @@ $kt_count_female = array();
 $sql10 = 'SELECT t.seat_no 
 FROM student_theory_marks t inner join students s 
 ON SUBSTR(t.seat_no, 2, LENGTH(t.seat_no) - 1) = s.seat_no 
-WHERE t.total_theory_marks = "--" and t.seat_no LIKE "1%" and s.gender = "/";';
+WHERE t.total_theory_marks = "--" and t.seat_no LIKE "'.$sem.'%" and s.gender = "/";';
 $result = $conn->query($sql10);
 $result_array = $result->fetchAll(PDO::FETCH_NUM);
 

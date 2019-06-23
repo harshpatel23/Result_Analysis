@@ -15,6 +15,8 @@ session_start();
               include 'filter_bar/filter_teacher.php';
             }elseif ($_SESSION['user_type'] == 'hod') {
               include 'filter_bar/filter_hod.php';
+            }elseif ($_SESSION['user_type'] == 'exam_section') {
+              include 'filter_bar/filter_examcell.php';
             }
           ?>
         </div>
@@ -33,37 +35,24 @@ session_start();
                     </div>
                 </div>
                 <div class="float-right">
-                    <!-- Login logout button -->
+                    <a href="logout.php">Logout</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+
 <div class="content-wrap">
     <div class="main">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-8 p-r-0 title-margin-right">
-                    <div class="page-header">
-                        <div class="page-title">
-                            <h1>Hello, <span>Welcome Here</span></h1>
-                        </div>
-                    </div>
-                </div>
                 <!-- /# column -->
-                <div class="col-lg-4 p-l-0 title-margin-left">
-                    <div class="page-header">
-                        <div class="page-title">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Home</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-                <!-- /# column -->
-            </div>
+<?php 
+if ($_SESSION["user_type"] == "exam_section"){
+    include "examcell/page-select.php";
+} else {
+?>
+           
             <!-- /# row -->
             <section id="main-content">
                 <div class="row">
@@ -82,7 +71,7 @@ session_start();
                     <div class="col-lg-5">
                         <div class="card">
                             <div class="card-title pr">
-                                <h4>Index</h4>
+                                <h4>Marks vs Number of Students</h4>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -101,6 +90,11 @@ session_start();
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="card">
+                        <div class="card-body">
+                        </div>
+                    </div>
                 <!-- <div class="row">
                     <div class="col-lg-5">
                         <div class="card">
@@ -109,7 +103,6 @@ session_start();
                             </div>
                         </div>
                     </div>
-                    <!-- /# column -->
                 </div> -->
             </section>
         </div>
@@ -174,5 +167,6 @@ session_start();
     }
   </script>
 <?php
+}
 include 'includes/footer.php';
 ?>

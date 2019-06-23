@@ -1,6 +1,3 @@
-<?php 
-include 'includes/header.html';
-?>
 <script type="text/javascript" src="scripts/analysis.js"></script>
 <style type="text/css">
   .result-table-div{
@@ -206,8 +203,3 @@ include 'includes/header.html';
 </div>
 
 <button id="print" type="button" class="btn btn-primary" onclick="printpdf()">Export as PDF</button>
-
-
-<?php 
-include 'includes/footer.php';
-?>

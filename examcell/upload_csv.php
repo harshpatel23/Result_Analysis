@@ -1,5 +1,5 @@
-<?php include 'includes/header.html'; ?>
-<?php include 'includes/db_conn.php'; ?>
+<?php //include 'includes/header.html'; ?>
+<?php //include 'includes/db_conn.php'; ?>
 <?php  
 	// Code for uploading the file
 	if ( isset($_POST["submit"]) ) {
@@ -143,4 +143,4 @@
 			</div>
 		</form>
 	</div>
-<?php include 'includes/footer.php'; ?>
+<?php //include 'includes/footer.php'; ?>

@@ -9,8 +9,12 @@
     <?php 
         if(isset($_SESSION['user_type']) && $_SESSION['user_type'] == "hod"){
             echo '<script type="text/javascript" src="scripts/filter_url_generator_hod.js"></script>';
-        }else{
+        }elseif (isset($_SESSION['user_type']) && $_SESSION['user_type'] == "exam_section"){
+            // echo '<script type="text/javascript" src="scripts/exam_cell.js"></script>';
+        }
+        else {
             echo '<script type="text/javascript" src="scripts/filter_url_generator.js"></script>';
+        
         } 
     ?>
 

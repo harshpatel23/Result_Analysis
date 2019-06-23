@@ -37,17 +37,10 @@ if(isset($_POST['submit'])){
 		    $hod_department = $splitted_role[1];
 
 		    $_SESSION['hod_department'] = $hod_department;
-		    header("Location: index.php");
  		}else{
- 			$_SESSION['user_type'] = $role;
-
- 			if($role === "exam_section"){
- 				// EXAM SECTION
- 				header("Location: analysis.php");
- 			}else{
- 				header("Location: index.php");
- 			}
+ 			$_SESSION['user_type'] = $role; 				
  		}
+ 		header("Location: index.php");
 	}else{
 		// Password verification failed
 		$_SESSION['password_incorrect'] = true;
