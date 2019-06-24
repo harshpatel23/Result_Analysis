@@ -3,51 +3,57 @@ session_start();
 include '../includes/db_conn.php';
 $sem = $_SESSION["sem-select"];
 $data = array();
-// Number of students passed without KT
-// male
-$total = array();
-$sql1 = 'select count(*) 
-from student_cgpa c inner join students s
-on SUBSTR(c.seat_no, 2, LENGTH(c.seat_no) - 1) = s.seat_no
-where gpa <> "--" and c.seat_no like "'.$sem.'%" and s.gender <> "/";';
-$result = $conn->query($sql1);
-$result_array = $result->fetch(PDO::FETCH_NUM);
-$total["male"] = $result_array[0];
+$table_suffix = array("_before_rev", "");
+$index_suffix = array("-rv", "");
 
-// female
-$sql2 = 'select count(*) 
-from student_cgpa c inner join students s
-on SUBSTR(c.seat_no, 2, LENGTH(c.seat_no) - 1) = s.seat_no
-where gpa <> "--" and c.seat_no like "'.$sem.'%" and s.gender = "/";';
-$result = $conn->query($sql2);
-$result_array = $result->fetch(PDO::FETCH_NUM);
-$total["female"] = $result_array[0];
+for ($i=0; $i < 2; $i++) { 
+    
+    // Number of students passed without KT
+    // male
+    $total = array();
+    $sql1 = 'select count(*) 
+    from student_cgpa'.$table_suffix[$i].' c inner join students s
+    on SUBSTR(c.seat_no, 2, LENGTH(c.seat_no) - 1) = s.seat_no
+    where gpa <> "--" and c.seat_no like "'.$sem.'%" and s.gender <> "/";';
+    $result = $conn->query($sql1);
+    $result_array = $result->fetch(PDO::FETCH_NUM);
+    $total["male"] = $result_array[0];
 
-$data["total"] = $total;
+    // female
+    $sql2 = 'select count(*) 
+    from student_cgpa'.$table_suffix[$i].' c inner join students s
+    on SUBSTR(c.seat_no, 2, LENGTH(c.seat_no) - 1) = s.seat_no
+    where gpa <> "--" and c.seat_no like "'.$sem.'%" and s.gender = "/";';
+    $result = $conn->query($sql2);
+    $result_array = $result->fetch(PDO::FETCH_NUM);
+    $total["female"] = $result_array[0];
+
+    $data["total".$index_suffix[$i]] = $total;
 
 
-// Number of minority students passed without KT
-// male
-$minority = array();
-$sql3 = 'select count(*)
-from student_cgpa c inner join students s 
-on SUBSTR(c.seat_no, 2, LENGTH(c.seat_no) - 1) = s.seat_no 
-where gpa <> "--" and c.seat_no like "'.$sem.'%" and s.Seat_Type = "MI" and s.gender <> "/";';
-$result = $conn->query($sql3);
-$result_array = $result->fetch(PDO::FETCH_NUM);
-$minority["male"] = $result_array[0];
+    // Number of minority students passed without KT
+    // male
+    $minority = array();
+    $sql3 = 'select count(*)
+    from student_cgpa'.$table_suffix[$i].' c inner join students s 
+    on SUBSTR(c.seat_no, 2, LENGTH(c.seat_no) - 1) = s.seat_no 
+    where gpa <> "--" and c.seat_no like "'.$sem.'%" and s.Seat_Type = "MI" and s.gender <> "/";';
+    $result = $conn->query($sql3);
+    $result_array = $result->fetch(PDO::FETCH_NUM);
+    $minority["male"] = $result_array[0];
 
-// female
-$sql4 = 'select count(*)
-from student_cgpa c inner join students s 
-on SUBSTR(c.seat_no, 2, LENGTH(c.seat_no) - 1) = s.seat_no 
-where gpa <> "--" and c.seat_no like "'.$sem.'%" and s.Seat_Type = "MI" and s.gender = "/";';
-$result = $conn->query($sql4);
-$result_array = $result->fetch(PDO::FETCH_NUM);
-$minority["female"] = $result_array[0];
+    // female
+    $sql4 = 'select count(*)
+    from student_cgpa'.$table_suffix[$i].' c inner join students s 
+    on SUBSTR(c.seat_no, 2, LENGTH(c.seat_no) - 1) = s.seat_no 
+    where gpa <> "--" and c.seat_no like "'.$sem.'%" and s.Seat_Type = "MI" and s.gender = "/";';
+    $result = $conn->query($sql4);
+    $result_array = $result->fetch(PDO::FETCH_NUM);
+    $minority["female"] = $result_array[0];
 
-$data["minority"] = $minority;
+    $data["minority".$index_suffix[$i]] = $minority;
 
+}
 // Number of students getting grade point 10
 // male
 $grade_pt = array();

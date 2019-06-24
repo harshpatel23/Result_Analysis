@@ -40,6 +40,9 @@
   <h1>K. J. Somaiya College of Engineering</h1>
   <h2>Semester 1 Result Analysis</h2>
 </div>
+<div>
+  <button id="print" type="button" class="btn btn-primary" onclick="printpdf()">Export as PDF</button>
+</div>
 <div id="printpdf">
 <div class="result-table-div">
   <div class="loader"></div>
@@ -103,7 +106,7 @@
 
 <div class="result-table-div">
   
-  <table class="table table-bordered result-table"rv id="minority-">
+  <table class="table table-bordered result-table"rv id="minority-rv">
     <thead>
       <tr>
         <th scope="col"></th>
@@ -202,4 +205,4 @@
 </div>
 </div>
 
-<button id="print" type="button" class="btn btn-primary" onclick="printpdf()">Export as PDF</button>
+
