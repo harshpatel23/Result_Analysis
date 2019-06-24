@@ -1,10 +1,10 @@
 <?php
-include "../includes/header.html";
-include '../includes/db_conn.php';
+// include "../includes/header.html";
+// include '../includes/db_conn.php';
 
-session_start();
+// session_start();
 
-if(!isset($_SESSION['uname']) || $_SESSION['uname'] !='admin'){
+if(!isset($_SESSION['user_type']) || $_SESSION['user_type'] !='admin'){
 	header("Location: ../login.php");
 }
 
@@ -59,5 +59,5 @@ $t_id = $_POST['t_id'];
 </div>
 
 <?php
-include "../includes/footer.php";
+// include "../includes/footer.php";
 ?>

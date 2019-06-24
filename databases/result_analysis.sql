@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 24, 2019 at 07:50 AM
+-- Generation Time: Jun 24, 2019 at 08:26 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -15236,7 +15236,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `password`, `role`) VALUES
 ('990011', '$2y$10$dmZevzowgW3J84Ja8wmbAuA9DGNiUDDsDOeaLVlA8t3e67hWMYROO', 'exam_section'),
 ('9999001', '$2y$10$DOGTTsjiGUFCwIuCnHBxTuDnKRjO/mDHv4gx6yHkxfpmUXdzhGqxG', 'teacher'),
-('9999002', '$2y$10$ZcpCX5h8TTCpq.Is9vEID.fua28CxFMrzZlDdyWo.qyMd4rH5/Qfa', 'hod_comps');
+('9999002', '$2y$10$ZcpCX5h8TTCpq.Is9vEID.fua28CxFMrzZlDdyWo.qyMd4rH5/Qfa', 'hod_comps'),
+('9999999', '$2y$10$iRyJoAGERrIyQsBL8Bs84O9N65gIAAPBTeJRT8BhvqisqHHJlRpFi', 'admin');
 
 --
 -- Indexes for dumped tables

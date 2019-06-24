@@ -1,7 +1,7 @@
 <?php
-include 'includes/header.html';
 session_start();
-	if(!isset($_SESSION['uname'])){
+include 'includes/header.html';
+if(!isset($_SESSION['uname'])){
 	header("Location: login.php");
 	}
 ?>
@@ -17,6 +17,9 @@ session_start();
               include 'filter_bar/filter_hod.php';
             }elseif ($_SESSION['user_type'] == 'exam_section') {
               include 'filter_bar/filter_examcell.php';
+            }
+            elseif ($_SESSION['user_type'] == 'admin') {
+              include 'filter_bar/filter_admin.php';
             }
           ?>
         </div>
@@ -50,6 +53,8 @@ session_start();
 <?php 
 if ($_SESSION["user_type"] == "exam_section"){
     include "examcell/page-select.php";
+} elseif ($_SESSION["user_type"] == "admin"){
+    include "admin/page_select.php";
 } else {
 ?>
            
