@@ -1,6 +1,6 @@
 <?php
 // include "../includes/header.html";
-// include '../includes/db_conn.php';
+include 'includes/db_conn.php';
 
 // session_start();
 

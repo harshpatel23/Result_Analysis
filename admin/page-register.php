@@ -1,4 +1,5 @@
 <?php 
+include 'includes/db_conn.php';
     if(isset($_POST['submit'])){
         $id = $_POST['id'];
         $password = $_POST['password'];
@@ -14,12 +15,12 @@
         if ($conn->errorCode() != 0){
             // die("ERROR!!!");
             $_SESSION['user_added_success'] = false;
-            header("Location: page-register.php");
+            header("Location: index.php?page=register");
 
         }else{
             // SUCCESS
             $_SESSION['user_added_success'] = true;
-            header("Location:  page-register.php");
+            header("Location:  index.php?page=register");
         }
     }
 ?>
